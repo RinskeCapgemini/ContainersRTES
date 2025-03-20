@@ -1,8 +1,8 @@
 """Simple calculation to determine CPU task time"""
 
 import random
-import os
 import time
+import psutil
 
 
 def basic_calculation():
@@ -13,7 +13,7 @@ def basic_calculation():
 
 
 if __name__=='__main__':
-    print(f"Operating on CPU core: {os.sched_getcpu()}")
+    # print(f"Operating on CPU core: {psutil.Process().cpu_num()}")
 
     start_time = time.time()
 
