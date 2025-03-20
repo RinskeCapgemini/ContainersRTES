@@ -1,6 +1,12 @@
 """Intense calculation for CPU time"""
 import time 
 
+def log_result(duration):
+    with open("log_files/long_calc_log.txt", "a") as log_file:
+        log_file.write(f"Task time = {duration}\n")
+
+    print(f"Task time = {duration}\n")
+
 def long_calculation(n):
     primes = [True] * (n + 1)
 
@@ -27,5 +33,4 @@ if __name__=='__main__':
 
     duration = time.time() - start_time
 
-    print(f"Task time = {duration}")
-
+    log_result(duration)
