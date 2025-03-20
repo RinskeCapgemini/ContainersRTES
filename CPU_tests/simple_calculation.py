@@ -2,8 +2,6 @@
 
 import random
 import time
-import psutil
-
 
 def basic_calculation():
     random_numbers = [random.random() for i in range(100000)]
