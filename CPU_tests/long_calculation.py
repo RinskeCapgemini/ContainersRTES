@@ -1,0 +1,1 @@
+"""Intense calculation for CPU time"""

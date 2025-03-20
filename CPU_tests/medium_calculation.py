@@ -1,0 +1,1 @@
+"""Medium intensity calculation for CPU time"""
