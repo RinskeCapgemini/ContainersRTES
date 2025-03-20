@@ -8,10 +8,7 @@ def basic_calculation():
 
     return sum(random_numbers)
 
-
-
 if __name__=='__main__':
-    # print(f"Operating on CPU core: {psutil.Process().cpu_num()}")
 
     start_time = time.time()
 
