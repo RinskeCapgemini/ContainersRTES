@@ -6,7 +6,7 @@ def fibonacci(n):
     
     return fibonacci(n - 1) + fibonacci(n - 2)
 
-def mid_calc(n=30):
+def mid_calc(n=40):
     for i in range(n):
         fibonacci(i)
 
