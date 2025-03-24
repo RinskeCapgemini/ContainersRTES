@@ -30,4 +30,4 @@ if __name__=='__main__':
 
     run_experiment(simple_calc, "Simple CPU")     
     run_experiment(mid_calc, "Mid CPU")
-    # run_experiment(long_calc, "Long CPU")
+    run_experiment(long_calc, "Long CPU")
