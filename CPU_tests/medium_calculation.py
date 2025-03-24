@@ -22,7 +22,7 @@ if __name__=='__main__':
 
     start_time = time.time()
 
-    medium_calculation(300)
+    medium_calculation(30)
 
     duration = time.time() - start_time
 
