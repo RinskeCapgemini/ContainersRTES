@@ -23,11 +23,11 @@ def run_experiment(func, name, runs=10):
         runtimes.append(duration)
     
     log_results(runtimes, name, file_name="automated_logs")
-    return runtimes
+    
         
 
 if __name__=='__main__':
 
     run_experiment(simple_calc, "Simple CPU")     
     run_experiment(mid_calc, "Mid CPU")
-    run_experiment(long_calc, "Long CPU")
+    # run_experiment(long_calc, "Long CPU")
