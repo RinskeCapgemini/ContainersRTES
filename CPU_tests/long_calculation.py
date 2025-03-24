@@ -29,7 +29,7 @@ if __name__=='__main__':
 
     start_time = time.time()
 
-    long_calculation(2000000)
+    long_calculation(200000000)
 
     duration = time.time() - start_time
 
