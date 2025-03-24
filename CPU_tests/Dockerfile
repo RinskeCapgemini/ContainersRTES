@@ -1,6 +1,8 @@
 FROM python:3.11-slim
 
-COPY container_testscript.py .
+WORKDIR /app
+
+COPY container_testscript.py /app/
 
 # COPY automated_cpu_test.py .
 # COPY long_calculation.py .
