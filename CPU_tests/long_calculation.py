@@ -1,6 +1,6 @@
 """Heavy calculation for CPU time"""
 
-def long_calc(n):
+def long_calc(n=2000000):
     primes = [True] * (n + 1)
 
     primes[0] = False
