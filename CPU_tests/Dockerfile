@@ -2,11 +2,9 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY container_testscript.py /app/
+COPY automated_cpu_test.py /app/
+COPY long_calculation.py /app/
+COPY medium_calculation.py /app/
+COPY simple_calculation.py /app/
 
-# COPY automated_cpu_test.py .
-# COPY long_calculation.py .
-# COPY medium_calculation.py . 
-# COPY simple_calculation.py .
-
-CMD ["python", "/app/container_testscript.py"]
+CMD ["sh", "-c", "python /app/automated_cpu_test.py && cat /app/automated_logs.txt"]
