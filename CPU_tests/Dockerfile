@@ -9,4 +9,4 @@ COPY container_testscript.py /app/
 # COPY medium_calculation.py . 
 # COPY simple_calculation.py .
 
-CMD ["sh", "-c", "container_testscript.py"]
+CMD ["python", "/app/container_testscript.py"]
