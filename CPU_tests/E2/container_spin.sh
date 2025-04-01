@@ -7,8 +7,13 @@ container_name="e2:simple_script"
 
 touch "$LOGFILE" 
 
+    if [ ! -f "$LOGFILE"]; then
+        echo "timestamp,container_name,runtime_ms" > "$LOGFILE"
+    fi
+
+
 log() {
-    echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "$LOGFILE"
+    echo "$1,$2,$3" >> "$LOGFILE"
 }
 
 create_container() {
@@ -19,7 +24,8 @@ create_container() {
     local finished_time=$(date +%s%N)
     local elapsed_ns=$((finished_time - start_time))
     local elapsed_ms=$((elapsed_ns / 1000000))
-    log "Container: $container_name, Runtime: ${elapsed_ms}ms"
+
+    log "$(date '+%Y-%m-%d %H:%M:%S')" "$container_name" "$elapsed_ms"
 
     echo "Created new container"
     
