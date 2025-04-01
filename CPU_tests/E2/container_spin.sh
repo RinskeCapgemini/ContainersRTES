@@ -1,7 +1,7 @@
 #!/bin/bash
 
 LOGDIR="./log_files"
-LOGFILE="$LOGDIR/container_performance.log"
+LOGFILE="$LOGDIR/container_performance.csv"
 
 container_name="e2:simple_script"
 
@@ -35,6 +35,6 @@ while true ; do
     
     create_container &
 
-    sleep 1
+    sleep 0.2
 
 done
