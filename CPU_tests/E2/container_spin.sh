@@ -5,11 +5,12 @@ LOGFILE="$LOGDIR/container_performance.csv"
 
 container_name="e2:simple_script"
 
+rm "$LOGFILE"
+
 touch "$LOGFILE" 
 
-    if [ ! -f "$LOGFILE"]; then
-        echo "timestamp,container_name,runtime_ms" > "$LOGFILE"
-    fi
+echo "timestamp,container_name,runtime_ms" > "$LOGFILE"
+
 
 
 log() {
@@ -19,7 +20,7 @@ log() {
 create_container() {
     local start_time=$(date +%s%N)
 
-    docker run --rm "$container_name" > /dev/null 2>&1
+    sudo docker run --rm "$container_name" > /dev/null 2>&1
 
     local finished_time=$(date +%s%N)
     local elapsed_ns=$((finished_time - start_time))
@@ -35,6 +36,6 @@ while true ; do
     
     create_container &
 
-    sleep 0.2
+    sleep 0.002
 
 done
