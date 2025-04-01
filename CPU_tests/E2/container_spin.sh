@@ -26,6 +26,8 @@ create_container() {
 
     running_containers=$(sudo docker ps -q --filter ancestor="$container_name" | wc -l)
 
+    echo "$running_containers" 
+
     log "$(date '+%Y-%m-%d %H:%M:%S')" "$container_name" "$elapsed_ms" "$running_containers"
 
     echo "Created new container"
