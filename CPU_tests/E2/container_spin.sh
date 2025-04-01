@@ -1,6 +1,7 @@
 #!/bin/bash
 
-LOGFILE="/log_files/container_performance.log"
+LOGDIR="./log_files"
+LOGFILE="$LOGDIR/container_performance.log"
 
 container_name="e2:simple_script"
 
