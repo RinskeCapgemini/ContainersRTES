@@ -2,7 +2,7 @@
 
 LOGFILE="/log_files/container_performance.log"
 
-container_name=""
+container_name="e2:simple_script"
 
 touch "$LOGFILE" 
 
