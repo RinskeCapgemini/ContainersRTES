@@ -31,3 +31,9 @@ The following parameters need to be added to the file (on the same line). By doi
 isolcpus=2,3 nohz_full=2,3 rcu_nocbs=2,3
 
 
+
+## Install Docker CLI
+https://docs.docker.com/engine/install/debian/ 
+
+
+

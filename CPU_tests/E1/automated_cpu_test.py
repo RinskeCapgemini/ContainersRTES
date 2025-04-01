@@ -7,7 +7,7 @@ from long_calculation import *
 def log_results(time_list, experiment_name, file_name):
     average = sum(time_list) / len(time_list)
 
-    with open(f"log_files/{file_name}.txt",'a') as log_file:
+    with open(f"{file_name}.txt",'a') as log_file:
         log_file.write(f"Experiment name = {experiment_name}\n")
         log_file.write(f"Raw data: \n")
         for i in time_list : log_file.write(f"{i}\n")
