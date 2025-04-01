@@ -1,6 +1,6 @@
 #!/bin/bash
 
-LOGFILE="./log_files/container_performance.log"
+LOGFILE="/log_files/container_performance.log"
 
 container_name=""
 
@@ -28,3 +28,4 @@ while true ; do
 
     sleep 1
 
+done
