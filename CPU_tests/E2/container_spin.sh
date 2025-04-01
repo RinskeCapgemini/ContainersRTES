@@ -22,11 +22,9 @@ create_container() {
     
 }
 
-while true ; do;
+while true ; do
     
     create_container &
-
-
 
     sleep 1
 
