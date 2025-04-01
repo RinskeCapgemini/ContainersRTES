@@ -17,7 +17,7 @@ create_container() {
     docker run --rm "$container_name" > /dev/null 2>&1
 
     local finished_time=$(date +%s%N)
-    local elapsed_ns=$((finished_time_time - start_time))
+    local elapsed_ns=$((finished_time - start_time))
     local elapsed_ms=$((elapsed_ns / 1000000))
     log "Container: $container_name, Runtime: ${elapsed_ms}ms"
 
