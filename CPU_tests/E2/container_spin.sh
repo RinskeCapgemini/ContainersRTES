@@ -20,13 +20,13 @@ create_container() {
     local elapsed_ns=$((finished_time_time - start_time))
     local elapsed_ms=$((elapsed_ns / 1000000))
     log "Container: $container_name, Runtime: ${elapsed_ms}ms"
+
+    echo "Created new container"
     
 }
 
 while true ; do
     
     create_container &
-
-    sleep 1
 
 done
