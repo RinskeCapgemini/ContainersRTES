@@ -11,8 +11,6 @@ touch "$LOGFILE"
 
 echo "timestamp,container_name,runtime_ms,active_containers" > "$LOGFILE"
 
-
-
 log() {
     echo "$1,$2,$3" >> "$LOGFILE"
 }
@@ -26,7 +24,7 @@ create_container() {
     local elapsed_ns=$((finished_time - start_time))
     local elapsed_ms=$((elapsed_ns / 1000000))
 
-    running_containers=$(docker ps -q --filter ancestor="$container_name" | wc -l)
+    running_containers=$(sudo docker ps -q --filter ancestor="$container_name" | wc -l)
 
     log "$(date '+%Y-%m-%d %H:%M:%S')" "$container_name" "$elapsed_ms" "$running_containers"
 
@@ -38,8 +36,5 @@ while true ; do
     
     create_container &
 
-  
-
-    sleep 0.05
 
 done
