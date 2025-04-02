@@ -2,7 +2,7 @@
 
 LOGDIR="/host_log_files"
 
-mkdir $LOGDIR
+mkdir -p $LOGDIR
 
 CONTAINER_ID=$(hostname)
 
