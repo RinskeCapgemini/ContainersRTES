@@ -18,13 +18,13 @@ log() {
 create_container() {
     local start_time=$(date +%s%N)
 
-    sudo docker run --rm "$container_name" > /dev/null 2>&1
+    sudo docker run -d "$container_name" 
 
     local finished_time=$(date +%s%N)
     local elapsed_ns=$((finished_time - start_time))
     local elapsed_ms=$((elapsed_ns / 1000000))
 
-    running_containers=$(sudo docker ps -q --filter ancestor="$container_name" | wc -l)
+    running_containers=$(sudo docker ps -q --filter ancestor="$container_name")
 
     echo "$running_containers" 
 
