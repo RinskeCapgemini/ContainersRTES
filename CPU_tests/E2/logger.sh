@@ -3,7 +3,7 @@
 LOGDIR="./log_files"
 CONTAINER_ID=$(hostname)
 
-LOGFILE="$LOGDIR/$CONTAINER_ID.txt"
+LOGFILE="$CONTAINER_ID.txt"
 
 touch "$LOGFILE" 
 
