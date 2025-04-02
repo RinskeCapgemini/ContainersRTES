@@ -18,10 +18,10 @@ log() {
 create_container() {
     local start_time=$(date +%s%N)
 
-    sudo docker run -d "$container_name" 
+    sudo docker run -d "$container_name"                # -d flag -> run container in background -> script continues, but time is not accurate; container is not finished.  
 
-    local finished_time=$(date +%s%N)
-    local elapsed_ns=$((finished_time - start_time))
+    local finished_time=$(date +%s%N)                   # Resulting finished_time is not measured when the containers is actually done. 
+    local elapsed_ns=$((finished_time - start_time))           
     local elapsed_ms=$((elapsed_ns / 1000000))
 
     running_containers=$(sudo docker ps -q --filter ancestor="$container_name")
@@ -37,6 +37,6 @@ create_container() {
 while true ; do
     
     create_container &
-    sleep 0.5
+    sleep 1.0
 
 done
