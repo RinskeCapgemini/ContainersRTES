@@ -4,7 +4,7 @@ Created the container using the Dockerfile and the following commands:
 sudo docker build -t e2:simple_script -f E2/Dockerfile . 
 
 
-sudo docker run -rm -v "/E2/log_files" e2:container_name
+sudo docker run --rm -v "/E2/log_files" e2:container_name
 
 
 Container name 
