@@ -17,3 +17,6 @@ def long_calc(n=20000000):
             result.append(i)
 
     return result
+
+if __name__=='__main__':
+    long_calc()

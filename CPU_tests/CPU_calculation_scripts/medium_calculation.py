@@ -11,3 +11,5 @@ def mid_calc(n=30):
         fibonacci(i)
 
 
+if __name__=='__main__':
+    mid_calc()
