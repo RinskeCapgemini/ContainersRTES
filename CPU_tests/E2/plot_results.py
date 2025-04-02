@@ -8,7 +8,8 @@ data_file = pd.read_csv(csv_file)
 data_file["timestamp"] = pd.to_datetime(data_file["timestamp"])
 
 plt.figure(figsize=(10,5))
-plt.plot(data_file["timestamp"], data_file["runtime_ms"], marker='o', linestyle='-')
+# plt.plot(data_file["timestamp"], data_file["runtime_ms"], marker='o', linestyle='-')
+plt.plot(data_file["runtime_ms"], data_file["active_containers"], marker='o', linestyle='-')
 
 plt.xlabel("Time")
 plt.ylabel("Runtime (ms)")
