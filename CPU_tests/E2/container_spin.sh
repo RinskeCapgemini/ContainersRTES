@@ -38,5 +38,4 @@ while true ; do
     
     create_container &
 
-
 done
