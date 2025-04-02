@@ -3,7 +3,7 @@
 LOGDIR="./log_files"
 LOGFILE="$LOGDIR/container_performance.csv"
 
-container_name="e2:middle_script"
+container_name="e2:mid_script"
 
 rm "$LOGFILE"
 
