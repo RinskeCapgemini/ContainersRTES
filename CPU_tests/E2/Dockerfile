@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY CPU_calculation_scripts/medium_calculation.py /app/
 
-run cat /etc/hostname
+RUN cat /etc/hostname
 
 
 CMD ["python", "medium_calculation.py"]
