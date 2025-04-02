@@ -9,5 +9,5 @@ Container name
 | Script name | Container name | Image ID |
 |---|---|---|
 | simple_calculation.py  | e2:simple_script  | 22d2a3cec084 |
-|   |   |
+| medium_calculation.py  | e2:mid_script  |
 |   |   |
