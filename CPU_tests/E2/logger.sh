@@ -8,7 +8,10 @@ CONTAINER_ID=$(hostname)
 
 LOGFILE="$LOGDIR/$CONTAINER_ID.txt"
 
-touch "$LOGFILE" 
+touch $LOGFILE 
+
+echo "Log directory: $LOGDIR"
+echo "Log file path: $LOGFILE"
 
 echo "Started: $(date +%s%N)" >> $LOGFILE                   # >> for appending
 
