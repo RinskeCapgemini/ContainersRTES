@@ -1,0 +1,13 @@
+#!/bin/bash
+
+LOGDIR="./log_files"
+CONTAINER_ID=$(hostname)
+
+LOGFILE="$LOGDIR/$CONTAINER_ID.csv"
+
+echo "Started: " >> $(date +%s%N) >> $LOGFILE                   # >> for appending
+
+python3 medium_calculation.py
+
+echo "Finished: " >> $(date +%s%N) >> $LOGFILE
+

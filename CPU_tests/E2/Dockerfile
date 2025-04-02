@@ -2,9 +2,11 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
+COPY logger.sh /app/
 COPY CPU_calculation_scripts/medium_calculation.py /app/
 
-RUN cat /etc/hostname
 
+RUN chmod +x logger.sh
 
-CMD ["python", "medium_calculation.py"]
+ENTRYPOINT [./logger.sh]
+
