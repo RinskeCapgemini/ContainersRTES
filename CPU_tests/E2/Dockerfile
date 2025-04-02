@@ -2,6 +2,6 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-COPY CPU_calculation_scripts/long_calculation.py /app/
+COPY CPU_calculation_scripts/medium_calculation.py /app/
 
-CMD ["python", "long_calculation.py"]
+CMD ["python", "medium_calculation.py"]
