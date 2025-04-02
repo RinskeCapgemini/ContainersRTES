@@ -19,3 +19,5 @@ python3 medium_calculation.py
 
 echo "Finished: $(date +%s%N)" >> $LOGFILE
 
+cat /host_log_files/d0d785ef40f8.txt
+
