@@ -3,7 +3,7 @@
 LOGDIR="./log_files"
 LOGFILE="$LOGDIR/container_performance.csv"
 
-container_name="e2:simple_script"
+container_name="e2:middle_script"
 
 rm "$LOGFILE"
 
@@ -37,5 +37,6 @@ create_container() {
 while true ; do
     
     create_container &
+    sleep 0.5
 
 done
