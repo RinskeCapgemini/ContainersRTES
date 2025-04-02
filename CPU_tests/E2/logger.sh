@@ -3,9 +3,9 @@
 LOGDIR="./log_files"
 CONTAINER_ID=$(hostname)
 
-touch "$LOGFILE" 
-
 LOGFILE="$LOGDIR/$CONTAINER_ID.txt"
+
+touch "$LOGFILE" 
 
 echo "Started: " >> $(date +%s%N) >> $LOGFILE                   # >> for appending
 
