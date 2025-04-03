@@ -1,9 +1,15 @@
 
 
 Created the container using the Dockerfile and the following commands:
-sudo docker build -t e2:simple_script -f E2/short_container/Dockerfile . 
 
-sudo docker run --rm -v /home/pirinske/GitHub/ContainersRTES/CPU_tests/E2/medium_container/log_files:/host_log_files e2:mid_script
+From CPU test directory:
+sudo docker build -t e2:mid_script -f E2/medium_container/Dockerfile . 
+
+
+From container directory:
+bash spinning_x.sh
+
+(sudo docker run --rm -v /home/pirinske/GitHub/ContainersRTES/CPU_tests/E2/medium_container/log_files:/host_log_files e2:mid_script)
 
 Container name 
 
