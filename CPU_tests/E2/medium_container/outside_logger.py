@@ -12,6 +12,23 @@ def to_seconds(timestamp):
     dt = datetime.strptime(timestamp.rstrip("Z"), "%Y-%m-%dT%H:%M:%S.%f")
     return dt.timestamp()  # Convert to seconds since epoch
 
+
+def to_seconds(timestamp):
+    # Remove the trailing "Z"
+    timestamp = timestamp.rstrip("Z")
+    # The expected format supports only microseconds (6 digits).
+    # If there are extra digits, truncate to the first 6 digits after the decimal point.
+    try:
+        dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
+    except ValueError:
+        # Find the decimal point
+        date_part, fraction = timestamp.split('.')
+        # Truncate fraction to 6 digits
+        fraction = fraction[:6]
+        new_timestamp = f"{date_part}.{fraction}"
+        dt = datetime.strptime(new_timestamp, "%Y-%m-%dT%H:%M:%S.%f")
+    return dt.timestamp()  # Convert to seconds since epoch
+
 def get_container_ids():
     container_ids = []
 
