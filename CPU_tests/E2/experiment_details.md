@@ -3,7 +3,7 @@
 Created the container using the Dockerfile and the following commands:
 sudo docker build -t e2:simple_script -f E2/Dockerfile . 
 
-sudo docker run --rm -v /home/pirinske/GitHub/ContainersRTES/CPU_tests/E2/log_files:/host_log_files e2:testing
+sudo docker run --rm -v /home/pirinske/GitHub/ContainersRTES/CPU_tests/E2/medium_container/log_files:/host_log_files e2:mid_script
 
 Container name 
 
