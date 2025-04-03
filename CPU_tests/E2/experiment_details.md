@@ -20,4 +20,12 @@ Container name
 | long_calculation.py  |  e2:long_script | 52a78b7aa545 | 
 
 
+1. Empty logfile directory -> TODO dat dit automatisch gebeurd. 
+2. Run 'bash spinning_x.sh' (on pi)
+3. Run 'sudo python outside_logger.py'
+4. commit results
+    --- switch to pc size ---
+5. Run 'logfiles_formatter.py'
+6. Run 'plots.py' 
+
 
