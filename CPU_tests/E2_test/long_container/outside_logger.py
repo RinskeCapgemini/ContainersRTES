@@ -18,16 +18,18 @@ def to_seconds(timestamp):
 def to_seconds(timestamp):
     # Remove the trailing "Z"
     timestamp = timestamp.rstrip("Z")
-    # The expected format supports only microseconds (6 digits).
-    # If there are extra digits, truncate to the first 6 digits after the decimal point.
     try:
+        # Try parsing assuming the timestamp includes microseconds.
         dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%S.%f")
     except ValueError:
-        # Find the decimal point
-        date_part, fraction = timestamp.split('.')
-        # Truncate fraction to 6 digits
-        fraction = fraction[:6]
-        new_timestamp = f"{date_part}.{fraction}"
+        # Check if there's a dot; if not, append '.000000'
+        if '.' not in timestamp:
+            new_timestamp = timestamp + '.000000'
+        else:
+            # Otherwise, if there's a dot but parsing still fails, split and truncate the fraction.
+            date_part, fraction = timestamp.split('.')
+            fraction = fraction[:6]
+            new_timestamp = f"{date_part}.{fraction}"
         dt = datetime.strptime(new_timestamp, "%Y-%m-%dT%H:%M:%S.%f")
     return dt.timestamp()  # Convert to seconds since epoch
 
