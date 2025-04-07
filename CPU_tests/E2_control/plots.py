@@ -2,8 +2,8 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 # Load data from the CSV file
-outside_data = pd.read_csv('medium_container/container_outside_logs.csv')
-inside_data = pd.read_csv('medium_container/container_logs.csv')
+outside_data = pd.read_csv('long_container/container_outside_logs.csv')
+inside_data = pd.read_csv('long_container/container_logs.csv')
 
 # Assuming the CSV has a column named 'time'
 # Create an index for datapoints (from 1 to number of rows)
