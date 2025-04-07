@@ -3,8 +3,8 @@ import csv
 import pandas as pd
 
 # Folder containing csv files
-folder_path = "short_container/log_files"
-output_csv = "short_container/container_logs.csv"
+folder_path = "long_container/log_files"
+output_csv = "long_container/container_logs.csv"
 
 # Calculate average total time
 def calculate_average(csv):
