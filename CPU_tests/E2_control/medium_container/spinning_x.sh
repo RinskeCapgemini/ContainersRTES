@@ -1,7 +1,7 @@
 #!/bin/bash
 
 
-for i in {0..99}; do
+for i in {0..10}; do
     # Change to container name
     sudo docker run -v /home/rinske/Github/ContainersRTES/CPU_tests/E2_control/medium_container/log_files:/host_log_files mid_script:1.0
 
