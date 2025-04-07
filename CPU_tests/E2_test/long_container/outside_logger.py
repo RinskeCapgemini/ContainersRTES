@@ -4,6 +4,8 @@ import csv
 from datetime import datetime
 import pandas as pd
 
+# sudo -E python3 outside_logger.py
+
 
 logger_path = "log_files"
 output_file = "container_outside_logs.csv"
