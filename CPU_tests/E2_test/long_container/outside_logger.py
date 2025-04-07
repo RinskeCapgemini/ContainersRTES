@@ -58,18 +58,22 @@ def calculate_average(csv):
     return df["total_time"].mean()
 
 if __name__=='__main__':
-    contianer_ids = get_container_ids()
+    container_ids = get_container_ids()
+    container_data = []
+
+    for cid in container_ids:
+        start, stop = container_times(cid)
+        total = stop - start
+        container_data.append((cid, start, stop, total))
+
+    # Sort the data by start time (second element of the tuple)
+    container_data.sort(key=lambda x: x[1])
 
     with open(output_file, "w", newline="") as csvfile:
         writer = csv.writer(csvfile)
         writer.writerow(["container_id", "started", "finished", "total_time"])
-
-        for id in contianer_ids:
-            start, stop = container_times(id)
-
-            total = stop - start
-
-            writer.writerow([id, start, stop, total])
+        for row in container_data:
+            writer.writerow(row)
 
     print(f"Average time {calculate_average(output_file)}")
 
