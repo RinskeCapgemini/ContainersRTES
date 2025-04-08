@@ -1,8 +1,13 @@
 import time
+import os
+import sys
 
-from simple_calculation import *
-from medium_calculation import *
-from long_calculation import *
+# Add the parent directory to the Python path
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
+from CPU_calculation_scripts.simple_calculation import *
+from CPU_calculation_scripts.medium_calculation import *
+from CPU_calculation_scripts.long_calculation import *
 
 def log_results(time_list, experiment_name, file_name):
     average = sum(time_list) / len(time_list)
