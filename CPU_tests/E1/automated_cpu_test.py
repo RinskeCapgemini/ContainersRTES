@@ -28,8 +28,7 @@ def run_experiment(func, name, runs=10):
         runtimes.append(duration)
     
     log_results(runtimes, name, file_name="automated_logs")
-    
-        
+
 
 if __name__=='__main__':
 
