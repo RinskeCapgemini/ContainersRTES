@@ -9,7 +9,7 @@ from CPU_calculation_scripts.simple_calculation import *
 from CPU_calculation_scripts.medium_calculation import *
 from CPU_calculation_scripts.long_calculation import *
 
-LOG_DIR = os.path.join(os.path.dirname(__file__), "log_files")
+LOG_DIR = os.path.join(os.path.dirname(__file__), "logs")
 os.makedirs(LOG_DIR, exist_ok=True)  # Make sure the directory exists
 
 def log_results(time_list, experiment_name, file_name):
