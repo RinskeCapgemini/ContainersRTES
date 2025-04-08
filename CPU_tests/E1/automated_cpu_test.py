@@ -9,10 +9,15 @@ from CPU_calculation_scripts.simple_calculation import *
 from CPU_calculation_scripts.medium_calculation import *
 from CPU_calculation_scripts.long_calculation import *
 
+LOG_DIR = os.path.join(os.path.dirname(__file__), "log_files")
+os.makedirs(LOG_DIR, exist_ok=True)  # Make sure the directory exists
+
 def log_results(time_list, experiment_name, file_name):
     average = sum(time_list) / len(time_list)
 
-    with open(f"{file_name}.txt",'a') as log_file:
+    log_path = os.path.join(LOG_DIR, f"{file_name}.txt")
+
+    with open(log_path,'a') as log_file:
         log_file.write(f"Experiment name = {experiment_name}\n")
         log_file.write(f"Raw data: \n")
         for i in time_list : log_file.write(f"{i}\n")
