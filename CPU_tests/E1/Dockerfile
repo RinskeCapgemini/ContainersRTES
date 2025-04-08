@@ -7,5 +7,6 @@ COPY CPU_calculation_scripts/long_calculation.py /CPU_calculation_scripts/
 COPY CPU_calculation_scripts/medium_calculation.py /CPU_calculation_scripts/
 COPY CPU_calculation_scripts/simple_calculation.py /CPU_calculation_scripts/
 
-CMD ["sh", "-c", "python /app/automated_cpu_test.py && cat /app/automated_logs.txt"]
+CMD ["python", "/app/automated_cpu_test.py"]
+
 
