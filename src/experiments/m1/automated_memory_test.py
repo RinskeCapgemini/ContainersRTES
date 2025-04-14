@@ -54,5 +54,5 @@ def run_experiment(func, name, runs=10):
 if __name__=='__main__':
 
     run_experiment(memory_low, "memory_low")     
-    run_experiment(memory_medium, "memory_medium")
-    run_experiment(memory_long, "memory_long")
+    # run_experiment(memory_medium, "memory_medium")
+    # run_experiment(memory_long, "memory_long")
