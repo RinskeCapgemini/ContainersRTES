@@ -16,15 +16,13 @@ from memory_long import memory_long
 LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
 os.makedirs(LOG_DIR, exist_ok=True)
 
-# output_file = "../../../logs/memory_logs/memory_usage_low.csv"          # Change name according to test being performed
-
 def log_results(time_list, experiment_name, file_name):
     average = sum(time_list) / len(time_list)
 
     log_path = os.path.join(LOG_DIR, f"{file_name}.csv")
 
     # Write results to a CSV file
-    with open(log_path, 'a', newline='') as csv_file:
+    with open(log_path, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
         
         # Write the header if the file is empty
@@ -58,6 +56,6 @@ if __name__=='__main__':
 
     run_experiment(memory_medium, "memory_medium")
     print("Done with experiment medium")
-    
+
     run_experiment(memory_long, "memory_long")
     print("Done with experiment long")
