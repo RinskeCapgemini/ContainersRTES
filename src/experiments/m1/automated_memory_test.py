@@ -13,64 +13,37 @@ from memory_medium import memory_medium
 from memory_long import memory_long
 
 # Ensure the logs directory exists
+LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
 os.makedirs("../../../logs", exist_ok=True)
 
-output_file = "../../../logs/memory_usage_low.csv"          # Change name according to test being performed
+output_file = "../../../logs/memory_logs/memory_usage_low.csv"          # Change name according to test being performed
 
-timestamps = []
-memory_usage = []
-_running = False
-_start_time = None
+def log_results(time_list, experiment_name, file_name):
+    average = sum(time_list) / len(time_list)
 
-process = psutil.Process(os.getpid())
+    log_path = os.path.join(LOG_DIR, f"{file_name}.txt")
 
-def start_tracking(output_file, interval=1.0):
-    global _running, _start_time
-
-    _running = True
-    _start_time = time.time()
-
-    with open(output_file, 'w', newline='') as f:
-        writer = csv.writer(f)
-        writer.writerow(['time_sec', 'memory_MB'])
-        while _running:
-            current_time = time.time() - _start_time
-            mem_usage = process.memory_info().rss / (1024 * 1024)
-            writer.writerow([current_time, mem_usage])
-            timestamps.append(current_time)
-            memory_usage.append(mem_usage)
-            time.sleep(interval)
-
-def stop_tracking():
-    global _running
-    _running = False
-
-def get_peak_memory():
-    return max(memory_usage) if memory_usage else 0
-
-def get_memory_data():
-    return timestamps, memory_usage
-
-if __name__ == "__main__":
-    # Start tracking memory usage
-    tracking_thread = psutil.Process(os.getpid())
-    start_tracking(output_file)
-
-    # Run memory tests
-    for i in range(10):
-        memory_low()
-        print(f"Itteration {i}")
-
-        # memory_medium()
-
-        # memory_long()
-
-    # Stop tracking memory usage
-    stop_tracking()
-
-    # Output peak memory usage
-    peak_memory = get_peak_memory()
-    print(f"Peak memory usage: {peak_memory:.2f} MB")
+    with open(log_path,'a') as log_file:
+        log_file.write(f"Experiment name = {experiment_name}\n")
+        log_file.write(f"Raw data: \n")
+        for i in time_list : log_file.write(f"{i}\n")
+        log_file.write(f"Average tasktime over x{len(time_list)} = {average}\n")
 
 
+def run_experiment(func, name, runs=10):
+    runtimes = []
 
+    for i in range(runs):
+        start_time = time.time()
+        func()
+        duration = time.time() - start_time
+        runtimes.append(duration)
+    
+    log_results(runtimes, name, file_name="automated_logs")
+
+
+if __name__=='__main__':
+
+    run_experiment(memory_low, "Simple CPU")     
+    run_experiment(memory_medium, "Mid CPU")
+    run_experiment(memory_long, "Long CPU")
