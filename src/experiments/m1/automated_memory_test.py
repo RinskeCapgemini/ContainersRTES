@@ -17,10 +17,10 @@ from memory_long import memory_long
 LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
 os.makedirs(LOG_DIR, exist_ok=True)
 
-def log_results(time_list, experiment_name, file_name):
+def log_results(time_list, experiment_name):
     average = sum(time_list) / len(time_list)
 
-    log_path = os.path.join(LOG_DIR, f"{file_name}.csv")
+    log_path = os.path.join(LOG_DIR,  f"{experiment_name}_time.csv")
 
     # Write results to a CSV file
     with open(log_path, 'w', newline='') as csv_file:
@@ -40,9 +40,9 @@ def log_results(time_list, experiment_name, file_name):
         
 def log_memory_usage(experiment_name, run_number, stop_event):
     process = psutil.Process(os.getpid())
-    memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_memory.csv")
+    memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
 
-    with open(memory_log_path, 'a', newline='') as csv_file:
+    with open(memory_log_path, 'w', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         # Write header if file is empty
@@ -74,7 +74,7 @@ def run_experiment(func, name, runs=10):
         stop_event.set()
         mem_logger.join()
 
-    log_results(runtimes, name, name)
+    log_results(runtimes, name)
 
 
 
@@ -83,8 +83,8 @@ if __name__=='__main__':
     run_experiment(memory_low, "memory_low")     
     print("Done with experiment low")
 
-    # run_experiment(memory_medium, "memory_medium")
-    # print("Done with experiment medium")
+    run_experiment(memory_medium, "memory_medium")
+    print("Done with experiment medium")
 
-    # run_experiment(memory_long, "memory_long")
-    # print("Done with experiment long")
+    run_experiment(memory_long, "memory_long")
+    print("Done with experiment long")
