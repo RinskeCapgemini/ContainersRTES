@@ -1,6 +1,6 @@
 # E4
 
-This experiment is a follow-up experiment based on E3. In E3 spinning multiple containers was impossible after 2 contianers. This experiment was used to determine the bottleneck.
+This experiment is a follow-up experiment based on E2_test. In E2 spinning multiple containers was impossible after 2 contianers. This experiment was used to determine the bottleneck.
 
 Cores:
 1. System processes

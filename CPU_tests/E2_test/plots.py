@@ -13,6 +13,7 @@ inside_values = inside_data['total_time']
 
 # Plot the time distribution for each datapoint
 plt.figure(figsize=(10, 6))
+plt.ylim(0, 60)  # Set y-axis from 0 to 50 seconds
 plt.plot(datapoints, outside_values, marker='o', linestyle='-', color='b')
 plt.plot(datapoints, inside_values, marker='o', linestyle='-', color='r')
 plt.xlabel('Datapoints')
