@@ -14,7 +14,7 @@ from memory_long import memory_long
 
 # Ensure the logs directory exists
 LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
-os.makedirs("../../../logs", exist_ok=True)
+os.makedirs(LOG_DIR, exist_ok=True)
 
 # output_file = "../../../logs/memory_logs/memory_usage_low.csv"          # Change name according to test being performed
 
@@ -48,7 +48,7 @@ def run_experiment(func, name, runs=10):
         duration = time.time() - start_time
         runtimes.append(duration)
     
-    log_results(runtimes, name, file_name="automated_logs")
+    log_results(runtimes, name, name)
 
 
 if __name__=='__main__':
