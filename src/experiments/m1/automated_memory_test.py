@@ -59,6 +59,7 @@ if __name__ == "__main__":
     # Run memory tests
     for i in range(10):
         memory_low()
+        print(f"Itteration {i}")
 
         # memory_medium()
 
