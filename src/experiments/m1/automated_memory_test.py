@@ -42,7 +42,7 @@ def log_memory_usage(experiment_name, run_number, stop_event):
     process = psutil.Process(os.getpid())
     memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
 
-    with open(memory_log_path, 'w', newline='') as csv_file:
+    with open(memory_log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         # Write header if file is empty
@@ -55,7 +55,7 @@ def log_memory_usage(experiment_name, run_number, stop_event):
             mem_usage_mb = process.memory_info().rss / 1024 / 1024
             timestamp = time.time() - start_time
             writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
-            time.sleep(1)
+            time.sleep(0.1)
 
 
 def run_experiment(func, name, runs=10):
