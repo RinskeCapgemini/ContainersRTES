@@ -16,18 +16,27 @@ from memory_long import memory_long
 LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
 os.makedirs("../../../logs", exist_ok=True)
 
-output_file = "../../../logs/memory_logs/memory_usage_low.csv"          # Change name according to test being performed
+# output_file = "../../../logs/memory_logs/memory_usage_low.csv"          # Change name according to test being performed
 
 def log_results(time_list, experiment_name, file_name):
     average = sum(time_list) / len(time_list)
 
-    log_path = os.path.join(LOG_DIR, f"{file_name}.txt")
+    log_path = os.path.join(LOG_DIR, f"{file_name}.csv")
 
-    with open(log_path,'a') as log_file:
-        log_file.write(f"Experiment name = {experiment_name}\n")
-        log_file.write(f"Raw data: \n")
-        for i in time_list : log_file.write(f"{i}\n")
-        log_file.write(f"Average tasktime over x{len(time_list)} = {average}\n")
+    # Write results to a CSV file
+    with open(log_path, 'a', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+        
+        # Write the header if the file is empty
+        if os.stat(log_path).st_size == 0:
+            writer.writerow(["Experiment Name", "Run Number", "Duration (s)"])
+        
+        # Write each runtime to the CSV
+        for i, runtime in enumerate(time_list, start=1):
+            writer.writerow([experiment_name, i, runtime])
+        
+        # Write the average runtime as a summary row
+        writer.writerow([experiment_name, "Average", average])
 
 
 def run_experiment(func, name, runs=10):
@@ -44,6 +53,6 @@ def run_experiment(func, name, runs=10):
 
 if __name__=='__main__':
 
-    run_experiment(memory_low, "Simple CPU")     
-    run_experiment(memory_medium, "Mid CPU")
-    run_experiment(memory_long, "Long CPU")
+    run_experiment(memory_low, "memory_low")     
+    run_experiment(memory_medium, "memory_medium")
+    run_experiment(memory_long, "memory_long")
