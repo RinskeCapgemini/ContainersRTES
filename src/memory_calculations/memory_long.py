@@ -7,7 +7,7 @@ def memory_long():
 
     for _ in range(10):
         _ = matrix[::25]  # Touch memory more frequently
-        time.sleep(0.5)
+        # time.sleep(0.5)
 
 if __name__=='__main__':
     memory_long()
