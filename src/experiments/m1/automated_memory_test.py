@@ -24,7 +24,7 @@ _start_time = None
 
 process = psutil.Process(os.getpid())
 
-def start_tracking(output_file, interval=0.05):
+def start_tracking(output_file, interval=1.0):
     global _running, _start_time
 
     _running = True
