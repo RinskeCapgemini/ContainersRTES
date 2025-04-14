@@ -3,6 +3,7 @@ import os
 import psutil
 import sys
 import csv
+import threading
 
 # Add the memory_calculations folder to the Python path
 memory_calculations_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../memory_calculations'))
@@ -36,17 +37,45 @@ def log_results(time_list, experiment_name, file_name):
         # Write the average runtime as a summary row
         writer.writerow([experiment_name, "Average", average])
 
+        
+def log_memory_usage(experiment_name, run_number, stop_event):
+    process = psutil.Process(os.getpid())
+    memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_memory.csv")
+
+    with open(memory_log_path, 'a', newline='') as csv_file:
+        writer = csv.writer(csv_file)
+
+        # Write header if file is empty
+        if os.stat(memory_log_path).st_size == 0:
+            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Memory Usage (MB)"])
+
+        start_time = time.time()
+
+        while not stop_event.is_set():
+            mem_usage_mb = process.memory_info().rss / 1024 / 1024
+            timestamp = time.time() - start_time
+            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
+            time.sleep(1)
+
 
 def run_experiment(func, name, runs=10):
     runtimes = []
 
     for i in range(runs):
+        stop_event = threading.Event()
+        mem_logger = threading.Thread(target=log_memory_usage, args=(name, i + 1, stop_event))
+        mem_logger.start()
+
         start_time = time.time()
         func()
         duration = time.time() - start_time
         runtimes.append(duration)
-    
+
+        stop_event.set()
+        mem_logger.join()
+
     log_results(runtimes, name, name)
+
 
 
 if __name__=='__main__':
