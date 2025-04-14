@@ -1,8 +1,8 @@
 import numpy as np
 
-def memory_low(x=1000, y=1000):
-    matrix = np.random.rand(x, y)
-    np.dot(matrix, matrix)
+def memory_low():
+    matrix = np.ones((4000, 3200)) 
+
 
 
 if __name__=='__main__':
