@@ -5,7 +5,7 @@ import sys
 import csv
 
 # Add the memory_calculations folder to the Python path
-memory_calculations_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../memory calculations'))
+memory_calculations_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '../../memory_calculations'))
 sys.path.append(memory_calculations_path)
 
 from memory_low import memory_low
