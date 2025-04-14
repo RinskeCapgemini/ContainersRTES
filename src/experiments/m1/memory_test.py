@@ -23,7 +23,7 @@ def log_results(time_list, experiment_name):
     log_path = os.path.join(LOG_DIR,  f"{experiment_name}_time.csv")
 
     # Write results to a CSV file
-    with open(log_path, 'w', newline='') as csv_file:
+    with open(log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
         
         # Write the header if the file is empty
@@ -38,7 +38,7 @@ def log_results(time_list, experiment_name):
         writer.writerow([experiment_name, "Average", average])
 
         
-def log_memory_usage(experiment_name, run_number, stop_event):
+def log_memory_usage(experiment_name, stop_event):
     process = psutil.Process(os.getpid())
     memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
 
@@ -47,32 +47,34 @@ def log_memory_usage(experiment_name, run_number, stop_event):
 
         # Write header if file is empty
         if os.stat(memory_log_path).st_size == 0:
-            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Memory Usage (MB)"])
+            writer.writerow(["Experiment Name", "Timestamp (s)", "Memory Usage (MB)"])
 
         start_time = time.time()
+
+        writer.writerow(["-", "-", "-"]) 
 
         while not stop_event.is_set():
             mem_usage_mb = process.memory_info().rss / 1024 / 1024
             timestamp = time.time() - start_time
-            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
+            writer.writerow([experiment_name, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
             time.sleep(0.1)
 
 
-def run_experiment(func, name, runs=10):
+def run_experiment(func, name):
     runtimes = []
 
-    for i in range(runs):
-        stop_event = threading.Event()
-        mem_logger = threading.Thread(target=log_memory_usage, args=(name, i + 1, stop_event))
-        mem_logger.start()
+    # for i in range(runs):
+    stop_event = threading.Event()
+    mem_logger = threading.Thread(target=log_memory_usage, args=(name, stop_event))
+    mem_logger.start()
 
-        start_time = time.time()
-        func()
-        duration = time.time() - start_time
-        runtimes.append(duration)
+    start_time = time.time()
+    func()
+    duration = time.time() - start_time
+    runtimes.append(duration)
 
-        stop_event.set()
-        mem_logger.join()
+    stop_event.set()
+    mem_logger.join()
 
     log_results(runtimes, name)
 
