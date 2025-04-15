@@ -1,9 +1,11 @@
 #!/bin/bash
 
+test_name=$1
+
 
 for i in {0..9}; do
     # Change to experiment name directory
-    python memory_test.py
+    python memory_test.py $test_name $i
 
     echo "Finishing experiment"
 
