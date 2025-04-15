@@ -15,7 +15,7 @@ for i in {0..9}; do
     sudo docker run --rm \
         -v "$host_log_dir:$container_log_dir" \
         -v "$host_test_program_dir:/app" \
-        -v "$host_memory_test_dir:/app" \
+        -v "$host_memory_test_program:/app" \
         general_container:1.0 memory_test.py $test_name $i experiment
 
     echo "Finishing experiment $i"
