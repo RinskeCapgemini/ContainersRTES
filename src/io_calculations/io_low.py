@@ -6,7 +6,7 @@ def io_low(file_path):
         for i in range(500):
             f.write(f"Line {i}: Hello World\n")
             f.flush()
-            time.sleep(0.01)            # Delay to simulate low memory usage
+            # time.sleep(0.01)            # Delay to simulate low memory usage
 
 
 if __name__ == "__main__":
