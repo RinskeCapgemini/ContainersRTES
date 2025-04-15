@@ -64,7 +64,7 @@ def log_io_usage(experiment_name, run_number, stop_event):
             time.sleep(0.1)  # Log every 0.1 seconds
 
 
-def run_experiment(func, name, run_number):
+def run_experiment(func, name, run_number, io_path):
     """
     Runs an experiment and logs its I/O usage and duration.
 
@@ -79,7 +79,7 @@ def run_experiment(func, name, run_number):
 
     start_time = time.time()  # Record the start time
 
-    func()  # Run the experiment function
+    func(io_path)  # Run the experiment function
 
     finish_time = time.time()  # Record the finish time
     duration = finish_time - start_time  # Calculate the duration
@@ -103,6 +103,8 @@ if __name__ == "__main__":
     run_number = int(sys.argv[2])  # Run number of the experiment
     test_type = sys.argv[3]
 
+    io_path = "/mnt/usb/test_io.txt"
+
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/io_logs" directory relative to the project root
     LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../io_logs", test_type))
@@ -116,4 +118,4 @@ if __name__ == "__main__":
     }
 
     # Run the specified experiment
-    run_experiment(function_map[experiment_name], experiment_name, run_number)
+    run_experiment(function_map[experiment_name], experiment_name, run_number, io_path)
