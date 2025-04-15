@@ -14,10 +14,7 @@ from memory_low import memory_low  # Function for low memory usage experiment
 from memory_medium import memory_medium  # Function for medium memory usage experiment
 from memory_long import memory_long  # Function for long memory usage experiment
 
-# Ensure the logs directory exists
-# Logs will be stored in the "logs/memory_logs" directory relative to the project root
-LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs"))
-os.makedirs(LOG_DIR, exist_ok=True)
+
 
 def log_results(duration, experiment_name, run_number, start_time, finish_time):
     """
@@ -96,12 +93,19 @@ if __name__=='__main__':
     """
     Main entry point for the script. Parses command-line arguments and runs the specified experiment.
     """
-    if len(sys.argv) != 3:
+
+    if len(sys.argv) != 4:
         print("Usage: python3 memory_test.py <experiment_name> <run_number>")
         sys.exit(1)
 
     experiment_name = sys.argv[1]  # Name of the experiment
     run_number = int(sys.argv[2])  # Run number of the experiment
+    test_type = sys.argv[3]
+
+    # Ensure the logs directory exists
+# Logs will be stored in the "logs/memory_logs" directory relative to the project root
+    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs", test_type))
+    os.makedirs(LOG_DIR, exist_ok=True)
 
     # Map experiment names to their corresponding functions
     function_map = {
