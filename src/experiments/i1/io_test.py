@@ -45,7 +45,7 @@ def log_io_usage(experiment_name, run_number, stop_event):
         stop_event (threading.Event): Event to signal when logging should stop.
     """
     process = psutil.Process(os.getpid())  # Get the current process
-    io_log_path = os.path.join(LOG_DIR, f"{experiment_name}_io_usage.csv")
+    io_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
 
     with open(io_log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
@@ -107,7 +107,7 @@ if __name__ == "__main__":
 
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/io_logs" directory relative to the project root
-    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../io_logs", test_type))
+    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/io_logs", test_type))
     os.makedirs(LOG_DIR, exist_ok=True)
 
     # Map experiment names to their corresponding functions
