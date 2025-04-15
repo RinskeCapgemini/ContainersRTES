@@ -2,7 +2,7 @@
 
 test_name=$1
 
-mkdir -p /home/rinske/Github/ContainersRTES/logs/memory_logs/experiments
+# mkdir -p /home/rinske/Github/ContainersRTES/logs/memory_logs
 
 # Log directories
 host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/experiments"  # Host directory for logs
