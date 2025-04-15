@@ -1,7 +1,10 @@
 #!/bin/bash
 test_name=$1
 
-sudo mount /dev/sda1 /mnt/usb
+# Check if the USB is already mounted
+if ! mountpoint -q /mnt/usb; then
+    sudo mount /dev/sda1 /mnt/usb
+fi
 
 # Directories
 host_log_dir="/home/rinske/Github/ContainersRTES/logs/io_logs/"  # Host directory for logs
