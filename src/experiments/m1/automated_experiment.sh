@@ -7,16 +7,16 @@ host_log_dir="/home/rinske/Github/ContainerRTES/logs/experiments/m1/experiment" 
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Python script directories
-host_test_program_dir="/home/rinske/Github/ContainerRTES/src/memory_calculations"  # Host directory containing other Python scripts
 host_memory_test_dir="/home/rinske/Github/ContainerRTES/src/experiments/m1"  # Directory containing memory_test.py
+host_memory_calculations_dir="/home/rinske/Github/ContainerRTES/src/memory_calculations"  # Directory containing memory calculation scripts
 
 for i in {0..9}; do
     # Run the Docker container with volume mappings for logs and scripts
     sudo docker run --rm \
         -v "$host_log_dir:$container_log_dir" \
-        -v "$host_test_program_dir:/app" \
-        -v "$host_memory_test_dir:/app" \
-        general_container:1.0 memory_test.py $test_name $i experiment
+        -v "$host_memory_test_dir:/app/experiments/m1" \
+        -v "$host_memory_calculations_dir:/app/memory_calculations" \
+        general_container:1.0 /app/experiments/m1/memory_test.py $test_name $i experiment
 
     echo "Finishing experiment $i"
 done
