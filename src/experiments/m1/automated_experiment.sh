@@ -2,8 +2,10 @@
 
 test_name=$1
 
+mkdir -p /home/rinske/Github/ContainersRTES/logs/memory_logs/experiments
+
 # Log directories
-host_log_dir="/home/rinske/Github/ContainersRTES/logs/experiments/m1/experiment"  # Host directory for logs
+host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/experiments"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Python script directories

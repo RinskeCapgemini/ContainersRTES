@@ -104,7 +104,7 @@ if __name__=='__main__':
 
     # Ensure the logs directory exists
 # Logs will be stored in the "logs/memory_logs" directory relative to the project root
-    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/memory_logs", test_type))
+    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs", test_type))
     os.makedirs(LOG_DIR, exist_ok=True)
 
     # Map experiment names to their corresponding functions
