@@ -40,7 +40,7 @@ def log_results(duration, experiment_name, run_number, start_time, finish_time):
         # Log the experiment details
         writer.writerow([experiment_name, run_number, start_time, finish_time, duration])
         
-def log_memory_usage(experiment_name, stop_event):
+def log_memory_usage(experiment_name, run_number, stop_event):
     """
     Logs memory usage of the current process to a CSV file at regular intervals.
 
@@ -56,7 +56,7 @@ def log_memory_usage(experiment_name, stop_event):
 
         # Write the header if the file is empty
         if os.stat(memory_log_path).st_size == 0:
-            writer.writerow(["Experiment Name", "Timestamp (s)", "Memory Usage (MB)"])
+            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Memory Usage (MB)"])
 
         start_time = time.time()
 
@@ -64,7 +64,7 @@ def log_memory_usage(experiment_name, stop_event):
         while not stop_event.is_set():
             mem_usage_mb = process.memory_info().rss / 1024 / 1024  # Convert memory usage to MB
             timestamp = time.time() - start_time  # Calculate elapsed time
-            writer.writerow([experiment_name, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
+            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
             time.sleep(0.1)  # Log every 0.1 seconds
 
 def run_experiment(func, name, run_number):
