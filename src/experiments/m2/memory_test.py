@@ -23,7 +23,7 @@ from memory_long import memory_long  # Function for long memory usage experiment
 
 
 
-def log_results(duration, experiment_name, run_number, start_time, finish_time):
+def log_results(duration, experiment_name, test_number, run_number, start_time, finish_time):
     """
     Logs the duration of an experiment to a CSV file.
 
@@ -32,19 +32,19 @@ def log_results(duration, experiment_name, run_number, start_time, finish_time):
         experiment_name (str): Name of the experiment.
         run_number (int): Run number of the experiment.
     """
-    log_path = os.path.join(LOG_DIR, f"{experiment_name}_inside_time.csv")
+    log_path = os.path.join(LOG_DIR, f"{experiment_name}_{test_number}_{run_number}_inside_time.csv")
 
     with open(log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         # Write the header if the file is empty
         if os.stat(log_path).st_size == 0:
-            writer.writerow(["Experiment Name", "Run Number", "Start Time", "Finish Time", "Duration (s)"])
+            writer.writerow(["Experiment Name", "Test Number", "Run Number", "Start Time", "Finish Time", "Duration (s)"])
 
         # Log the experiment details
-        writer.writerow([experiment_name, run_number, start_time, finish_time, duration])
+        writer.writerow([experiment_name, test_number, run_number, start_time, finish_time, duration])
         
-def log_memory_usage(experiment_name, run_number, stop_event):
+def log_memory_usage(experiment_name, test_number, run_number, stop_event):
     """
     Logs memory usage of the current process to a CSV file at regular intervals.
 
@@ -53,14 +53,14 @@ def log_memory_usage(experiment_name, run_number, stop_event):
         stop_event (threading.Event): Event to signal when logging should stop.
     """
     process = psutil.Process(os.getpid())  # Get the current process
-    memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
+    memory_log_path = os.path.join(LOG_DIR, f"{experiment_name}_{test_number}_{run_number}_usage.csv")
 
     with open(memory_log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         # Write the header if the file is empty
         if os.stat(memory_log_path).st_size == 0:
-            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Memory Usage (MB)"])
+            writer.writerow(["Experiment Name", "Test Number", "Run Number", "Timestamp (s)", "Memory Usage (MB)"])
 
         start_time = time.time()
 
@@ -68,10 +68,10 @@ def log_memory_usage(experiment_name, run_number, stop_event):
         while not stop_event.is_set():
             mem_usage_mb = process.memory_info().rss / 1024 / 1024  # Convert memory usage to MB
             timestamp = time.time() - start_time  # Calculate elapsed time
-            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
+            writer.writerow([experiment_name, test_number, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
             time.sleep(0.1)  # Log every 0.1 seconds
 
-def run_experiment(func, name, run_number):
+def run_experiment(func, name, test_number, run_number):
     """
     Runs an experiment and logs its memory usage and duration.
 
@@ -81,7 +81,7 @@ def run_experiment(func, name, run_number):
         run_number (int): Run number of the experiment.
     """
     stop_event = threading.Event()  # Event to signal when to stop memory logging
-    mem_logger = threading.Thread(target=log_memory_usage, args=(name, run_number, stop_event))  # Memory logging thread
+    mem_logger = threading.Thread(target=log_memory_usage, args=(name, test_number, run_number, stop_event))  # Memory logging thread
     mem_logger.start()  # Start the memory logging thread
 
     start_time = time.time()  # Record the start time
@@ -94,7 +94,7 @@ def run_experiment(func, name, run_number):
     stop_event.set()  # Signal the memory logging thread to stop
     mem_logger.join()  # Wait for the memory logging thread to finish
 
-    log_results(duration, name, run_number, start_time, finish_time)  # Log the experiment duration
+    log_results(duration, name, test_number, run_number, start_time, finish_time)  # Log the experiment duration
 
 if __name__=='__main__':
     """
@@ -106,8 +106,9 @@ if __name__=='__main__':
         sys.exit(1)
 
     experiment_name = sys.argv[1]   # Name of the experiment
-    run_number = int(sys.argv[2])   # Run number of the experiment
-    test_type = sys.argv[3]         # Control or experiment (for logfiles)
+    test_number = int(sys.argv[2])      # Test number
+    run_number = int(sys.argv[3])   # Run number of the experiment
+    test_type = sys.argv[4]         # Control or experiment (for logfiles)
 
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/memory_logs" directory relative to the project root
@@ -122,4 +123,4 @@ if __name__=='__main__':
     }
 
     # Run the specified experiment
-    run_experiment(function_map[experiment_name], experiment_name, run_number)
+    run_experiment(function_map[experiment_name], experiment_name, test_number, run_number)
