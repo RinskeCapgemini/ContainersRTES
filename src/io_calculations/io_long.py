@@ -5,7 +5,7 @@ def io_long(file_path):
     block = os.urandom(1024 * 1024)
 
     with open(file_path, 'wb') as f:
-        for i in range(100):
+        for i in range(1000):
             f.write(block)
             f.flush()
 
