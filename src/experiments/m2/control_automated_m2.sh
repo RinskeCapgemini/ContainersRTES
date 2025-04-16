@@ -3,7 +3,7 @@
 test_name=$1
 
 # Directory on the host system where the CSV log file will be stored
-HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/"  # Host directory for logs
+HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/m2"  # Host directory for logs
 OUTSIDE_LOGFILE="$HOST_LOGDIR/control_outside_logs.csv"
 
 CONTAINER_LOGDIR="/app/logs"  # Container directory for logs
