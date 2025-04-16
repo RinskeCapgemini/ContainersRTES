@@ -30,6 +30,7 @@ The following parameters need to be added to the file (on the same line). By doi
 
 isolcpus=2,3 nohz_full=2,3 rcu_nocbs=2,3
 
+console=serial0,115200 console=tty1 root=PARTUUID=xxxx-xx rootfstype=ext4 elevator=deadline fsck.repair=yes rootwait isolcpus=2,3 nohz_full=2,3 rcu_nocbs=2,3
 
 
 ## Install Docker CLI
