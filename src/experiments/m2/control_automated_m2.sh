@@ -19,7 +19,7 @@ if [ ! -f "$LOGFILE" ]; then
 fi
 
 for i in {0..9}; do
-    for j in (seq 0 $i); do
+    for j in $(seq 0 $i); do
         # Log the start time of the container execution
         START_TIME=$(date +%s%N)
 

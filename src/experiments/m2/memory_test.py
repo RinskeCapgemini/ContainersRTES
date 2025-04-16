@@ -32,7 +32,7 @@ def log_results(duration, experiment_name, run_number, start_time, finish_time):
         experiment_name (str): Name of the experiment.
         run_number (int): Run number of the experiment.
     """
-    log_path = os.path.join(LOG_DIR, f"{experiment_name}_time.csv")
+    log_path = os.path.join(LOG_DIR, f"{experiment_name}_inside_time.csv")
 
     with open(log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
