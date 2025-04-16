@@ -1,9 +1,10 @@
 #!/bin/bash
 
-test_name=$1
-
 # Directory on the host system where the CSV log file will be stored
-HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/m2"  # Host directory for logs
+HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/m2/control/"  # Host directory for logs
+
+mkdir -p "$HOST_LOGDIR"  # Create the log directory if it doesn't exist
+
 OUTSIDE_LOGFILE="$HOST_LOGDIR/control_outside_logs.csv"
 
 CONTAINER_LOGDIR="/app/logs"  # Container directory for logs
@@ -12,6 +13,7 @@ CONTAINER_LOGDIR="/app/logs"  # Container directory for logs
 HOST_EXPERIMENT_DIR="/home/rinske/Github/ContainersRTES/src/experiments/m2"  # Directory containing memory_test.py
 HOST_MEMORY_CALCULATIONS="/home/rinske/Github/ContainersRTES/src/memory_calculations"  # Directory containing memory calculation scripts
 
+test_name=$1
 
 # Create the CSV log file with a header if it does not already exist
 if [ ! -f "$OUTSIDE_LOGFILE" ]; then

@@ -38,29 +38,45 @@ def log_results(duration, experiment_name, run_number, start_time, finish_time):
 
 def log_io_usage(experiment_name, run_number, stop_event):
     """
-    Logs I/O usage of the current process to a CSV file at regular intervals.
+    Logs I/O speed (bytes per second) of the current process to a CSV file at regular intervals.
 
     Args:
         experiment_name (str): Name of the experiment.
+        run_number (int): Run number of the experiment.
         stop_event (threading.Event): Event to signal when logging should stop.
     """
     process = psutil.Process(os.getpid())  # Get the current process
-    io_log_path = os.path.join(LOG_DIR, f"{experiment_name}_usage.csv")
+    io_log_path = os.path.join(LOG_DIR, f"{experiment_name}_speed.csv")
 
     with open(io_log_path, 'a', newline='') as csv_file:
         writer = csv.writer(csv_file)
 
         # Write the header if the file is empty
         if os.stat(io_log_path).st_size == 0:
-            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Read Bytes", "Write Bytes"])
+            writer.writerow(["Experiment Name", "Run Number", "Timestamp (s)", "Read Speed (B/s)", "Write Speed (B/s)"])
 
         start_time = time.time()
+        prev_time = start_time
+        prev_io_counters = process.io_counters()  # Get initial I/O counters
 
-        # Log I/O usage until the stop event is set
+        # Log I/O speed until the stop event is set
         while not stop_event.is_set():
-            io_counters = process.io_counters()  # Get I/O counters
-            timestamp = time.time() - start_time  # Calculate elapsed time
-            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", io_counters.read_bytes, io_counters.write_bytes])
+            current_time = time.time()
+            io_counters = process.io_counters()  # Get current I/O counters
+
+            # Calculate elapsed time and I/O speed
+            elapsed_time = current_time - prev_time
+            read_speed = (io_counters.read_bytes - prev_io_counters.read_bytes) / elapsed_time
+            write_speed = (io_counters.write_bytes - prev_io_counters.write_bytes) / elapsed_time
+
+            # Log the I/O speed
+            timestamp = current_time - start_time
+            writer.writerow([experiment_name, run_number, f"{timestamp:.2f}", f"{read_speed:.2f}", f"{write_speed:.2f}"])
+
+            # Update previous values
+            prev_time = current_time
+            prev_io_counters = io_counters
+
             time.sleep(0.1)  # Log every 0.1 seconds
 
 
