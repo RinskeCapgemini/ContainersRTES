@@ -3,7 +3,7 @@
 test_name=$1
 
 # Directory on the host system where the CSV log file will be stored
-HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/"  # Host directory for logs
+HOST_LOGDIR="/home/rinske/Github/ContainersRTES/logs/memory_logs/control"  # Host directory for logs
 OUTSIDE_LOGFILE="$HOST_LOGDIR/outside_logs.csv"
 
 CONTAINER_LOGDIR="/app/logs"  # Container directory for logs
@@ -14,7 +14,7 @@ HOST_MEMORY_CALCULATIONS="/home/rinske/Github/ContainersRTES/src/memory_calculat
 
 
 # Create the CSV log file with a header if it does not already exist
-if [ ! -f "$LOGFILE" ]; then
+if [ ! -f "$OUTSIDE_LOGFILE" ]; then
     echo "Container ID, Experiment (i), Start Time (ns),Finish Time (ns),Duration (ns)" > $OUTSIDE_LOGFILE
 fi
 
@@ -37,9 +37,9 @@ for i in {0..9}; do
         DURATION=$((FINISH_TIME - START_TIME))
 
         # Append the log entry to the CSV file
-        echo "$CONTAINER_ID,$i,$START_TIME,$FINISH_TIME,$DURATION" >> $LOGFILE
+        echo "$CONTAINER_ID,$i,$START_TIME,$FINISH_TIME,$DURATION" >> $OUTSIDE_LOGFILE
 
-        echo "Finishing experiment $i, iteration $j"
+        echo "Finishing iteration $j"
     done
 
     echo "Finishing experiment $i"
