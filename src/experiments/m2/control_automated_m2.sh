@@ -37,7 +37,7 @@ for test in {0..9}; do
         DURATION=$((FINISH_TIME - START_TIME))
 
         # Append the log entry to the CSV file
-        echo "$CONTAINER_ID,$i,$START_TIME,$FINISH_TIME,$DURATION" >> $OUTSIDE_LOGFILE
+        echo "$CONTAINER_ID,$test,$START_TIME,$FINISH_TIME,$DURATION" >> $OUTSIDE_LOGFILE
 
         echo "Finishing measurement $measurement"
     done

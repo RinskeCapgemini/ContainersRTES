@@ -69,7 +69,7 @@ def log_memory_usage(experiment_name, test_number, run_number, stop_event):
             mem_usage_mb = process.memory_info().rss / 1024 / 1024  # Convert memory usage to MB
             timestamp = time.time() - start_time  # Calculate elapsed time
             writer.writerow([experiment_name, test_number, run_number, f"{timestamp:.2f}", f"{mem_usage_mb:.2f}"])
-            time.sleep(0.1)  # Log every 0.1 seconds
+            time.sleep(0.5)  # Log every 0.5 seconds
 
 def run_experiment(func, name, test_number, run_number):
     """
@@ -101,7 +101,7 @@ if __name__=='__main__':
     Main entry point for the script. Parses command-line arguments and runs the specified experiment.
     """
 
-    if len(sys.argv) != 4:
+    if len(sys.argv) != 5:
         print("Usage: python3 memory_test.py <experiment_name> <run_number>")
         sys.exit(1)
 
