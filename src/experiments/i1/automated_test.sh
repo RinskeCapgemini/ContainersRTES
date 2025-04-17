@@ -18,7 +18,7 @@ host_usb_dir="/mnt/usb"  # Host directory for external USB
 container_usb_dir="/app/usb"  # Container directory for external USB
 
 # CSV file to store experiment data
-csv_file="$host_log_dir/$test_name/${test_name}_outside_time.csv"
+csv_file="$host_log_dir$test_name/${test_name}_outside_time.csv"
 
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
@@ -43,7 +43,7 @@ for i in {0..9}; do
     finish_epoch=$(date +%s.%N)  # Epoch time with nanoseconds
 
     # Calculate and log the duration
-    duration=$(echo "$finish_epoch - $start_epoch" | bc)  # Duration with high precision
+    duration=$(echo "$finish_epoch - $start_epoch")  # Duration with high precision
 
     # Append the data to the CSV file
     echo "$test_name,$i,$start_time,$finish_time,$duration" >> "$csv_file"
