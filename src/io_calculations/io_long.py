@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 
 def io_heavy_random(file_path):
@@ -16,6 +17,9 @@ def io_heavy_random(file_path):
 
 
 if __name__ == "__main__":
+
+    start_time = time.time()
+
     file_path = "/mnt/usb/test_io_random.txt"
 
     # Create a large file to perform random writes
@@ -23,3 +27,8 @@ if __name__ == "__main__":
         f.truncate(10 * 1024 * 1024 * 1024)  # Pre-allocate 10 GB file
 
     io_heavy_random(file_path)
+
+    finish_time = time.time()
+    duration = finish_time - start_time  # Calculate the duration
+
+    print(f"Program runtime: {duration:.2f} seconds")
