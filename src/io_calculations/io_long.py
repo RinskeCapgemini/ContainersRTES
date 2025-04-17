@@ -2,10 +2,10 @@ import os
 
 
 def io_long(file_path):
-    block = os.urandom(1 * 1024 * 1024)
+    block = os.urandom(10 * 1024 * 1024)
 
     with open(file_path, 'wb') as f:
-        for i in range(50000):
+        for i in range(400000):
             f.write(block)
             f.flush()
             os.fsync(f.fileno())
