@@ -18,7 +18,7 @@ host_usb_dir="/mnt/usb"  # Host directory for external USB
 container_usb_dir="/app/usb"  # Container directory for external USB
 
 # CSV file to store experiment data
-csv_file="$host_log_dir/experiment/${test_name}_outside_time.csv"
+csv_file="${host_log_dir}experiment/${test_name}_outside_time.csv"
 
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
