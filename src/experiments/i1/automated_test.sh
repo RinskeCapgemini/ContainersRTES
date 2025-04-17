@@ -18,7 +18,7 @@ host_usb_dir="/mnt/usb"  # Host directory for external USB
 container_usb_dir="/app/usb"  # Container directory for external USB
 
 # CSV file to store experiment data
-csv_file="${test_name}_outside_time.csv"
+csv_file="$host_log_dir/$test_name/${test_name}_outside_time.csv"
 
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
@@ -27,9 +27,8 @@ fi
 
 for i in {0..9}; do
     # Log the start time
-    start_time=$(date '+%Y-%m-%d %H:%M:%S')
-    start_epoch=$(date +%s)
-    echo "Starting experiment $i at $start_time"
+    start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+    start_epoch=$(date +%s.%N)  # Epoch time with nanoseconds
 
     # Run the Docker container with volume mappings for logs, scripts, and USB
     sudo docker run --rm \
@@ -40,13 +39,11 @@ for i in {0..9}; do
         general_container:1.0 /app/experiments/i1/io_test.py $test_name $i experiment
 
     # Log the finish time
-    finish_time=$(date '+%Y-%m-%d %H:%M:%S')
-    finish_epoch=$(date +%s)
-    echo "Finishing experiment $i at $finish_time"
+    finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+    finish_epoch=$(date +%s.%N)  # Epoch time with nanoseconds
 
     # Calculate and log the duration
-    duration=$((finish_epoch - start_epoch))
-    echo "Experiment $i took $duration seconds"
+    duration=$(echo "$finish_epoch - $start_epoch" | bc)  # Duration with high precision
 
     # Append the data to the CSV file
     echo "$test_name,$i,$start_time,$finish_time,$duration" >> "$csv_file"
