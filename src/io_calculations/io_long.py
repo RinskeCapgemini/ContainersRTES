@@ -18,6 +18,8 @@ def io_heavy_random(file_path):
 
 if __name__ == "__main__":
 
+    print("Starting I/O heavy random write test...")
+
     start_time = time.time()
 
     file_path = "/mnt/usb/test_io_random.txt"
