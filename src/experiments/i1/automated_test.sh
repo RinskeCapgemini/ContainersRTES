@@ -22,13 +22,12 @@ csv_file="${host_log_dir}experiment/${test_name}_outside_time.csv"
 
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
-    echo "Experiment Name,Run Number,Start Time,Finish Time,Duration" > "$csv_file"
+    echo "Experiment Name,Run Number,Start Time,Finish Time" > "$csv_file"
 fi
 
 for i in {0..9}; do
     # Log the start time
     start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
-    start_epoch=$(date +%s.%N)  # Epoch time with nanoseconds
 
     # Run the Docker container with volume mappings for logs, scripts, and USB
     sudo docker run --rm \
@@ -40,12 +39,8 @@ for i in {0..9}; do
 
     # Log the finish time
     finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
-    finish_epoch=$(date +%s.%N)  # Epoch time with nanoseconds
-
-    # Calculate and log the duration
-    duration=$(echo "$finish_epoch - $start_epoch")  # Duration with high precision
 
     # Append the data to the CSV file
-    echo "$test_name,$i,$start_time,$finish_time,$duration" >> "$csv_file"
+    echo "$test_name,$i,$start_time,$finish_time >> "$csv_file"
 done
 
