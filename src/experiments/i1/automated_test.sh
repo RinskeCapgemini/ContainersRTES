@@ -41,6 +41,6 @@ for i in {0..9}; do
     finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
     # Append the data to the CSV file
-    echo "$test_name,$i,$start_time,$finish_time >> "$csv_file"
+    echo "$test_name,$i,$start_time,$finish_time" >> "$csv_file"
 done
 
