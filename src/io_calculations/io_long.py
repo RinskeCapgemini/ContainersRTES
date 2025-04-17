@@ -1,5 +1,5 @@
 import os
-
+import time
 
 def io_long(file_path):
 
@@ -13,5 +13,13 @@ def io_long(file_path):
 
 
 if __name__ == "__main__":
+
+    start_time = time.time()
+
     file_path = "/mnt/usb/test_io.txt"
     io_long(file_path)
+
+
+    finish_time = time.time() - start_time
+
+    print(f"Time taken: {finish_time:.2f} seconds")
