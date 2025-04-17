@@ -3,7 +3,7 @@ test_name=$1
 
 # Check if the USB is already mounted
 if ! mountpoint -q /mnt/usb; then
-    sudo mount /dev/sda1 /mnt/usb
+    sudo mount -o sync /dev/sda1 /mnt/usb
 fi
 
 # Directories
@@ -17,7 +17,20 @@ host_io_calculations_dir="/home/rinske/Github/ContainersRTES/src/io_calculations
 host_usb_dir="/mnt/usb"  # Host directory for external USB
 container_usb_dir="/app/usb"  # Container directory for external USB
 
+# CSV file to store experiment data
+csv_file="${test_name}_outside_time.csv"
+
+# Add CSV header if the file doesn't exist
+if [ ! -f "$csv_file" ]; then
+    echo "Experiment Name,Run Number,Start Time,Finish Time,Duration" > "$csv_file"
+fi
+
 for i in {0..9}; do
+    # Log the start time
+    start_time=$(date '+%Y-%m-%d %H:%M:%S')
+    start_epoch=$(date +%s)
+    echo "Starting experiment $i at $start_time"
+
     # Run the Docker container with volume mappings for logs, scripts, and USB
     sudo docker run --rm \
         -v "$host_log_dir:$container_log_dir" \
@@ -26,6 +39,16 @@ for i in {0..9}; do
         -v "$host_usb_dir:$container_usb_dir" \
         general_container:1.0 /app/experiments/i1/io_test.py $test_name $i experiment
 
-    echo "Finishing experiment $i"
+    # Log the finish time
+    finish_time=$(date '+%Y-%m-%d %H:%M:%S')
+    finish_epoch=$(date +%s)
+    echo "Finishing experiment $i at $finish_time"
+
+    # Calculate and log the duration
+    duration=$((finish_epoch - start_epoch))
+    echo "Experiment $i took $duration seconds"
+
+    # Append the data to the CSV file
+    echo "$test_name,$i,$start_time,$finish_time,$duration" >> "$csv_file"
 done
 
