@@ -18,7 +18,7 @@ host_memory_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/m1"  # 
 host_memory_calculations_dir="/home/rinske/Github/ContainersRTES/src/memory_calculations"  # Directory containing memory calculation scripts
 
 # CSV file to store experiment data
-csv_file="${host_log_dir}experiment/${test_name}_outside_time.csv"
+csv_file="${host_log_dir}experiment/${test_name}_container_time.csv"
 
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
@@ -45,7 +45,5 @@ for i in {0..9}; do
 
 
 done
-
-
 
 sudo unmount /mnt/usb
