@@ -20,8 +20,10 @@ container_usb_dir="/app/usb"  # Container directory for external USB
 # CSV file to store experiment data container runtimes
 csv_file="${host_log_dir}experiment/experiment_container_time.csv"
 
-chmod 777 $csv_file 
+# Ensure the parent directory for the CSV file exists
+mkdir -p "${host_log_dir}experiment"
 
+# Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
     echo "Experiment Name,Run Number,Start Time,Finish Time" > "$csv_file"
 fi
