@@ -125,8 +125,8 @@ def run_experiment(name, run_number, io_path):
 
 
 if __name__ == "__main__":
-    io_path = "/mnt/usb/1GB.bin"            # TODO: Change to filename
-    # io_path = "/app/usb/test_io.txt"  # Path to the I/O test file
+    # io_path = "/mnt/usb/1GB.bin"          
+    io_path = "/app/usb/1GB.bin"  # Path to the I/O test file
 
 
     run_number = int(sys.argv[1])   # Run number of the experiment
@@ -135,7 +135,7 @@ if __name__ == "__main__":
 
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/io_logs" directory relative to the project root
-    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../../logs/io_logs/i2", test_type))              #"../../../logs/io_logs/i2", /app/logs
+    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs", test_type))              #"../../../logs/io_logs/i2", /app/logs
     os.makedirs(LOG_DIR, exist_ok=True)
 
     run_experiment(test_type, run_number, io_path)
