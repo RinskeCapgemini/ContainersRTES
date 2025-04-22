@@ -26,6 +26,8 @@ mkdir -p "${host_log_dir}experiment"
 # Add CSV header if the file doesn't exist
 if [ ! -f "$csv_file" ]; then
     echo "Experiment Name,Run Number,Start Time,Finish Time" > "$csv_file"
+
+    chmod 777 "$csv_file"  # Make the CSV file writable
 fi
 
 for i in {0..9}; do
