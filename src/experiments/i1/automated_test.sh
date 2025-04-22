@@ -7,7 +7,7 @@ if ! mountpoint -q /mnt/usb; then
 fi
 
 # Directories
-host_log_dir="/home/rinske/Github/ContainersRTES/logs/io_logs/i1"  # Host directory for logs
+host_log_dir="/home/rinske/Github/ContainersRTES/logs/io_logs/i1/"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
 
 host_io_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/i1"  # Directory containing io_test.py
