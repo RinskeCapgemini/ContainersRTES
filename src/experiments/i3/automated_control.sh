@@ -42,7 +42,7 @@ for i in {0..9}; do
         -v "$host_log_dir:$container_log_dir" \
         -v "$host_io_test_dir:/app/experiments/i3" \
         -v "$host_usb_dir:$container_usb_dir" \
-        general_container:1.0 /app/experiments/i3/read_io.py $i experiment
+        general_container:1.0 /app/experiments/i3/read_contol.py $i experiment
 
     # Log the finish time
     finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
