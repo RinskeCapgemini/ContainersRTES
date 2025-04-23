@@ -52,11 +52,11 @@ To execute CPU tests, use the following command:
 taskset -c 3 python3 <test.py>
 ```
 
-### Docker running instructions
+### Experiment running instructions
 
 
 
-### Experiment E1
+### Experiment C1
 1. Navigate to the `src/experiments/e1/` directory.
 2. Run the `automated_cpu_test.py` script:
    ```bash
@@ -72,7 +72,7 @@ sudo docker run --cpuset-cpus=3 -v /home/rinske/Github/ContainersRTES/CPU_tests/
 ```
 
 
-### Experiment E2
+### Experiment C2
 1. Navigate to the `src/experiments/e2/` directory.
 2. Use the `container_spin.sh` script to spin up containers:
    ```bash
@@ -87,9 +87,54 @@ sudo docker run --cpuset-cpus=3 -v /home/rinske/Github/ContainersRTES/CPU_tests/
    python3 plots.py
    ```
 
-### Experiment E3
+### Experiment C3
 1. Navigate to the `src/experiments/e3/` directory.
 2. Follow the instructions in `Instructions.md` to run the experiment.
+
+### Experiment M1
+
+
+
+
+### Experiment M2
+This experiment is used to determine the effects of disabling swap memory.
+
+```bash
+sudo dphys-swapfile swapoff
+free -h
+```
+
+
+
+### Experiment M3
+
+This experiment is used to determine the effects of the container on the system when the OOM killer is enabled in panic mode. Panic mode enables the system to reboot when the OOM killer is invoked. 
+
+Make sure swap memory is disabled.
+
+1. Run the control experiment
+```bash
+sudo bash autmated_control.sh <memory_function_name>
+``` 
+2. Check current OOM panic settings
+```bash 
+cat /proc/sys/vm/panic_on_oom
+```
+- 0: disabled
+- 1: enabled
+
+3. Temporarily enable panic on OOM (until reboot)
+```bash
+sudo sysctl -w vm.panic_on_oom=1
+sudo sysctl -w kernel.panic=10
+```
+```bash
+sudo sysctl -p 
+```
+4. Run the experiment
+```bash
+sudo bash autmated_experiment.sh <memory_function_name>
+``` 
 
 ---
 
