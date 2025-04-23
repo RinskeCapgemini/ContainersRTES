@@ -97,26 +97,6 @@ def read_1gb_binary(io_path):
         print(f"Error while reading the file: {e}")
         sys.exit(1)
 
-def read_zip(zip_path):
-
-    total_bytes_read = 0
-
-    file_list = []
-    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
-        file_list = zip_ref.namelist()
-
-        for file_name in file_list:
-            with zip_ref.open(file_name) as file:
-                # Read the file content (for demonstration purposes, we just read it)
-                data = file.read()
-
-                total_bytes_read += len(data)
-
-    print (f"Total bytes read from zip: {total_bytes_read}")
-
-
-
-
 def run_experiment(name, run_number, io_path):
     """
     Runs an experiment and logs its I/O usage and duration.
@@ -133,7 +113,7 @@ def run_experiment(name, run_number, io_path):
     start_time = time.time()  # Record the start time
 
     # Call the function to read the binary file
-    read_zip(io_path)  # Read the binary file
+    read_1gb_binary(io_path)  # Read the binary file
 
     finish_time = time.time()  # Record the finish time
     duration = finish_time - start_time  # Calculate the duration
@@ -146,18 +126,15 @@ def run_experiment(name, run_number, io_path):
 
 if __name__ == "__main__":
     # io_path = "/mnt/usb/1GB.bin"          
-    io_path = "/app/usb/binaries.zip"  # Path to the zip test file
+    io_path = "/app/usb/1GB.bin"  # Path to the zip test file
 
 
     run_number = int(sys.argv[1])   # Run number of the experiment
     test_type = sys.argv[2]         # control or experiment 
-    filename = sys.argv[3]       # Name of the test file
-
-    FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/usb", filename))  # Path to the test file
 
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/io_logs" directory relative to the project root
     LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs", test_type))              #"../../../logs/io_logs/i2", /app/logs
     os.makedirs(LOG_DIR, exist_ok=True)
 
-    run_experiment(test_type, run_number, FILE_PATH)
+    run_experiment(test_type, run_number, io_path)
