@@ -1,7 +1,7 @@
 #!/bin/bash
 
 """
-Control uses same code as experiment i2. Control is reading one 1GB file
+Control uses same code as experiment i3. Control is reading one 1GB file
 """
 
 
@@ -12,11 +12,11 @@ fi
 
 
 # Log directories
-host_log_dir="/home/rinske/Github/ContainersRTES/logs/io_logs/i2/"  # Host directory for logs
+host_log_dir="/home/rinske/Github/ContainersRTES/logs/io_logs/i3/"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Directories containing code files
-host_io_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/i2"  # Directory containing io_test.py
+host_io_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/i3"  # Directory containing io_test.py
 
 # External USB directory 
 host_usb_dir="/mnt/usb"  # Host directory for external USB
@@ -40,9 +40,9 @@ for i in {0..9}; do
     # Run the Docker container with volume mappings for logs, scripts, and USB
     sudo docker run --rm \
         -v "$host_log_dir:$container_log_dir" \
-        -v "$host_io_test_dir:/app/experiments/i2" \
+        -v "$host_io_test_dir:/app/experiments/i3" \
         -v "$host_usb_dir:$container_usb_dir" \
-        general_container:1.0 /app/experiments/i2/read_io.py $i experiment binaries.zip
+        general_container:1.0 /app/experiments/i3/read_io.py $i experiment binaries.zip
 
     # Log the finish time
     finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
