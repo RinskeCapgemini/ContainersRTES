@@ -151,11 +151,13 @@ if __name__ == "__main__":
 
     run_number = int(sys.argv[1])   # Run number of the experiment
     test_type = sys.argv[2]         # control or experiment 
+    filename = sys.argv[3]       # Name of the test file
 
+    FILE_PATH = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/usb", filename))  # Path to the test file
 
     # Ensure the logs directory exists
     # Logs will be stored in the "logs/io_logs" directory relative to the project root
     LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs", test_type))              #"../../../logs/io_logs/i2", /app/logs
     os.makedirs(LOG_DIR, exist_ok=True)
 
-    run_experiment(test_type, run_number, io_path)
+    run_experiment(test_type, run_number, FILE_PATH)
