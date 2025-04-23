@@ -19,7 +19,7 @@ host_usb_dir="/mnt/usb"  # Host directory for external USB
 container_usb_dir="/app/usb"  # Container directory for external USB
 
 # CSV file to store experiment data container runtimes
-csv_file="${host_log_dir}experiment/experiment_container_time.csv"
+csv_file="${host_log_dir}control/control_container_time.csv"
 
 
 # Add CSV header if the file doesn't exist
