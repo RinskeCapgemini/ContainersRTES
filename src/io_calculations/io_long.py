@@ -14,8 +14,8 @@ def io_long(file_path):
 
 if __name__ == "__main__":
 
-    # file_path = "/mnt/usb/test_io.txt" 
-    file_path = "/app/usb/test_io.txt"  # Path to the I/O test file
+    file_path = "/mnt/usb/test_io.txt" 
+    # file_path = "/app/usb/test_io.txt"  # Path to the I/O test file
     io_long(file_path)
 
 
