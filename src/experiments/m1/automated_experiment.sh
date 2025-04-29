@@ -4,10 +4,6 @@
 
 test_name=$1
 
-# Check if the USB is already mounted
-if ! mountpoint -q /mnt/usb; then
-    sudo mount -o sync /dev/sda1 /mnt/usb
-fi
 
 # Log directories
 host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/m1/"  # Host directory for logs
@@ -45,7 +41,3 @@ echo "$test_name,0,$start_time,$finish_time" >> "$csv_file"
 
 
 # done
-
-
-
-sudo unmount /mnt/usb
