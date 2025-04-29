@@ -4,7 +4,7 @@ test_name=$1
 
 # for i in {0..9}; do
 # Change to experiment name directory
-sudo taskset -c python3 cpu_test.py $test_name 0 control
+sudo taskset -c 3 python3 cpu_test.py $test_name 0 control
 
 echo "Finishing experiment"
 
