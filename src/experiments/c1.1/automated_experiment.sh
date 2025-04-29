@@ -8,7 +8,7 @@ host_log_dir="/home/rinske/Github/ContainersRTES/logs/cpu_logs/c1/"  # Host dire
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Python script directories
-host_cpu_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/c1"  # Directory containing cpu_test.py
+host_cpu_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/c1.1"  # Directory containing cpu_test.py
 host_cpu_calculations_dir="/home/rinske/Github/ContainersRTES/src/cpu_calculations"  # Directory containing cpu calculation scripts
 
 # CSV file to store experiment data
