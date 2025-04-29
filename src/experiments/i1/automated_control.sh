@@ -7,13 +7,13 @@ fi
 
 test_name=$1
 
-# for i in {0..9}; do
-# Change to experiment name directory
-sudo python io_test.py $test_name 0 control
+for i in {0..9}; do
+    # Change to experiment name directory
+    sudo python io_test.py $test_name $i control
 
-echo "Finishing experiment"
+    echo "Finishing experiment"
 
-# done
+done
 
 
-sudo umount /mnt/usb
+sudo unmount /mnt/usb

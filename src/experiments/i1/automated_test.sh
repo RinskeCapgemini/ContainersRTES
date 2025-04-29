@@ -25,22 +25,22 @@ if [ ! -f "$csv_file" ]; then
     echo "Experiment Name,Run Number,Start Time,Finish Time" > "$csv_file"
 fi
 
-# for i in {0..9}; do
-#     # Log the start time
-start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+for i in {0..9}; do
+    # Log the start time
+    start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
-# Run the Docker container with volume mappings for logs, scripts, and USB
-sudo docker run --rm \
-    -v "$host_log_dir:$container_log_dir" \
-    -v "$host_io_test_dir:/app/experiments/i1" \
-    -v "$host_io_calculations_dir:/app/io_calculations" \
-    -v "$host_usb_dir:$container_usb_dir" \
-    general_container:1.0 /app/experiments/i1/io_test.py $test_name 0 experiment
+    # Run the Docker container with volume mappings for logs, scripts, and USB
+    sudo docker run --rm \
+        -v "$host_log_dir:$container_log_dir" \
+        -v "$host_io_test_dir:/app/experiments/i1" \
+        -v "$host_io_calculations_dir:/app/io_calculations" \
+        -v "$host_usb_dir:$container_usb_dir" \
+        general_container:1.0 /app/experiments/i1/io_test.py $test_name $i experiment
 
-# Log the finish time
-finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+    # Log the finish time
+    finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
-# Append the data to the CSV file
-echo "$test_name,0,$start_time,$finish_time" >> "$csv_file"
-# done
-# 
+    # Append the data to the CSV file
+    echo "$test_name,$i,$start_time,$finish_time" >> "$csv_file"
+done
+
