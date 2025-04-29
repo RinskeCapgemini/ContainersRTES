@@ -16,4 +16,4 @@ echo "Finishing experiment"
 # done
 
 
-sudo unmount /mnt/usb
+sudo umount /mnt/usb
