@@ -4,11 +4,11 @@ test_name=$1
 test_type=$2 
 
 # Log directories
-host_log_dir="/home/rinske/Github/ContainersRTES/logs/cpu_logs/m1/"  # Host directory for logs
+host_log_dir="/home/rinske/Github/ContainersRTES/logs/cpu_logs/c1/"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Python script directories
-host_cpu_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/m1"  # Directory containing cpu_test.py
+host_cpu_test_dir="/home/rinske/Github/ContainersRTES/src/experiments/c1"  # Directory containing cpu_test.py
 host_cpu_calculations_dir="/home/rinske/Github/ContainersRTES/src/cpu_calculations"  # Directory containing cpu calculation scripts
 
 # CSV file to store experiment data
@@ -29,9 +29,9 @@ start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanosecon
 # Run the Docker container with volume mappings for logs and scripts
 sudo docker run --cpuset-cpus=3 --rm \
     -v "$host_log_dir:$container_log_dir" \
-    -v "$host_cpu_test_dir:/app/experiments/m1" \
+    -v "$host_cpu_test_dir:/app/experiments/c1" \
     -v "$host_cpu_calculations_dir:/app/cpu_calculations" \
-    general_container:1.0 /app/experiments/m1/cpu_test.py $test_name $i $test_type
+    general_container:1.0 /app/experiments/c1/cpu_test.py $test_name $i $test_type
 
 # Log the finish time
 finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
