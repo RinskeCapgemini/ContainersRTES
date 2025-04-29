@@ -1,6 +1,6 @@
 """Heavy calculation for CPU time"""
 
-def long_calc(n=20000000):
+def cpu_long(n=20000000):
     primes = [True] * (n + 1)
 
     primes[0] = False
@@ -19,4 +19,4 @@ def long_calc(n=20000000):
     return result
 
 if __name__=='__main__':
-    long_calc()
+    cpu_long()
