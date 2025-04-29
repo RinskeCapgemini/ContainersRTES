@@ -35,13 +35,13 @@ sudo docker run --rm \
     -v "$host_log_dir:$container_log_dir" \
     -v "$host_memory_test_dir:/app/experiments/m1" \
     -v "$host_memory_calculations_dir:/app/memory_calculations" \
-    general_container:1.0 /app/experiments/m1/memory_test.py $test_name $i experiment
+    general_container:1.0 /app/experiments/m1/memory_test.py $test_name 0 experiment
 
 # Log the finish time
 finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
 # Append the data to the CSV file
-echo "$test_name,$i,$start_time,$finish_time" >> "$csv_file"
+echo "$test_name,0,$start_time,$finish_time" >> "$csv_file"
 
 
 # done
