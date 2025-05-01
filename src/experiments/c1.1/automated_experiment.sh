@@ -22,22 +22,22 @@ fi
 
 # sudo docker run --cpuset-cpus=3 -v /home/rinske/Github/ContainersRTES/CPU_tests/E1/log_files:/app/logs e1:1.0
 
-# for i in {0..9}; do
-# Log the start time
-start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+for i in {0..9}; do
+    # Log the start time
+    start_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
-# Run the Docker container with volume mappings for logs and scripts
-sudo docker run --cpuset-cpus=3 --rm \
-    -v "$host_log_dir:$container_log_dir" \
-    -v "$host_cpu_test_dir:/app/experiments/c1" \
-    -v "$host_cpu_calculations_dir:/app/cpu_calculations" \
-    general_container:1.0 /app/experiments/c1/cpu_test.py $test_name 0 $test_type
+    # Run the Docker container with volume mappings for logs and scripts
+    sudo docker run --cpuset-cpus=3 --rm \
+        -v "$host_log_dir:$container_log_dir" \
+        -v "$host_cpu_test_dir:/app/experiments/c1" \
+        -v "$host_cpu_calculations_dir:/app/cpu_calculations" \
+        general_container:1.0 /app/experiments/c1/cpu_test.py $test_name 0 $test_type
 
-# Log the finish time
-finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
+    # Log the finish time
+    finish_time=$(date '+%Y-%m-%d %H:%M:%S.%N')  # Human-readable time with nanoseconds
 
-# Append the data to the CSV file
-echo "$test_name,0,$start_time,$finish_time" >> "$csv_file"
+    # Append the data to the CSV file
+    echo "$test_name,0,$start_time,$finish_time" >> "$csv_file"
 
 
-# done
+done
