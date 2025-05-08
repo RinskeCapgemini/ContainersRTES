@@ -1,9 +1,5 @@
 #!/bin/bash
 
-"""
-Experiment is reading 10 100MB files, together 1 GB. 
-"""
-
 # Check if the USB is already mounted
 if ! mountpoint -q /mnt/usb; then
     sudo mount -o sync /dev/sda1 /mnt/usb

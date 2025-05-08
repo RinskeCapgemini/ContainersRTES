@@ -14,8 +14,6 @@ from memory_low import memory_low  # Function for low memory usage experiment
 from memory_medium import memory_medium  # Function for medium memory usage experiment
 from memory_long import memory_long  # Function for long memory usage experiment
 
-
-
 def log_results(duration, experiment_name, run_number, start_time, finish_time):
     """
     Logs the duration of an experiment to a CSV file.

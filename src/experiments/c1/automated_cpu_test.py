@@ -39,6 +39,6 @@ def run_experiment(func, name, runs=10):
 
 if __name__=='__main__':
 
-    run_experiment(SimpleCalculation.simple_calc, "Simple CPU")     
-    run_experiment(MediumCalculation.mid_calc, "Mid CPU")
+    # run_experiment(SimpleCalculation.simple_calc, "Simple CPU")     
+    # run_experiment(MediumCalculation.mid_calc, "Mid CPU")
     run_experiment(LongCalculation.long_calc, "Long CPU")
