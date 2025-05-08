@@ -57,18 +57,63 @@ taskset -c 3 python3 <test.py>
 
 
 ### Experiment C1
-1. Navigate to the `src/experiments/e1/` directory.
-2. Run the `automated_cpu_test.py` script:
-   ```bash
-   python3 automated_cpu_test.py
-   ```
-3. Use the `plot.py` script to generate visualizations:
-   ```bash
-   python3 plot.py
-   ```
+1. Update CPU-core settings in:
+```bash
+sudo nano /boot/firmware/cmdline.txt 
+```
+change file snippet to:
+
+
+
+2. Run control experiment using the following command:
 
 ```bash
-sudo docker run --cpuset-cpus=3 -v /home/rinske/Github/ContainersRTES/CPU_tests/E1/log_files:/app/logs e1:1.0
+sudo taskset -3 python automated_control.sh <experiment> control
+```
+
+3. isolate docker to CPU core 2:
+
+```bash 
+sudo systemctl edit docker 
+```
+
+change file and add: 
+```ini
+[Service]
+CPUAffinity=2
+```
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+4. Run the automated experiment
+```bash
+bash automated_experiment.sh <test name> container+engine 
+```
+5. isolate docker to CPU core 3:
+
+```bash 
+sudo systemctl edit docker 
+```
+
+change file and add: 
+```ini
+[Service]
+CPUAffinity=3
+```
+
+```bash
+sudo systemctl daemon-reexec
+sudo systemctl daemon-reload
+sudo systemctl restart docker
+```
+
+6. Run the automated experiment
+```bash
+bash automated_experiment.sh <test name> container+engine 
 ```
 
 
@@ -93,16 +138,28 @@ sudo docker run --cpuset-cpus=3 -v /home/rinske/Github/ContainersRTES/CPU_tests/
 
 ### Experiment M1
 
+1. Run the control experiment
+```bash
+sudo bash autmated_control.sh <memory_function_name>
+``` 
+2. Run the experiment
+```bash
+sudo bash autmated_experiment.sh <memory_function_name>
+``` 
+
 
 
 
 ### Experiment M2
 This experiment is used to determine the effects of disabling swap memory.
 
+1. Run the control experiment 
+2. Disable swap memory by using the following command; check using htop command. 
 ```bash
 sudo dphys-swapfile swapoff
 free -h
 ```
+3. Run the experiment for the different test scripts. 
 
 
 
