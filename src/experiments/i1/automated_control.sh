@@ -16,4 +16,4 @@ for i in {0..9}; do
 done
 
 
-sudo unmount /mnt/usb
+sudo umount /mnt/usb
