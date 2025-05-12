@@ -159,7 +159,14 @@ This experiment is used to determine the effects of disabling swap memory.
 sudo dphys-swapfile swapoff
 free -h
 ```
-3. Run the experiment for the different test scripts. 
+3. Run the actual experiment using the different test scripts. 
+
+After the crash the following commands were used to determine the cause of the crash:
+```bash
+journalctl -b -1 | grep -i -E "oom|killed|panic|segfault|temp|thermal|overheat"
+```
+The log results didn’t show indication of crashes caused by OOM, kernel panic, overheating, segmentation faults or thermal throttling. 
+
 
 
 
