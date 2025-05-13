@@ -200,7 +200,20 @@ sudo sysctl -p
 sudo bash autmated_experiment.sh <memory_function_name>
 ``` 
 
+
+### Experiment I1 
+
+1. Run with
+```bash 
+sudo automated_control.sh <experiment name>
+```
+
+
+
 ---
+
+
+
 
 ## Remote Connection
 
