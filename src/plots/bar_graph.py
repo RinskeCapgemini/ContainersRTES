@@ -36,7 +36,7 @@ def plot_separate_graphs(file_path):
             plt.text(1, program_time + surplus_time + 0.5, f"{program_time + surplus_time:.2f}s", ha='center', va='bottom', fontsize=10)
 
             # Extend the y-axis to create space above the bars
-            plt.ylim(0, max(control_time, program_time + surplus_time) * 1.2)
+            plt.ylim(0, max(control_time, program_time + surplus_time) * 1.5)
 
             # Add labels, title, and legend
             plt.ylabel("Time (s)", fontsize=12)
@@ -50,7 +50,7 @@ def plot_separate_graphs(file_path):
 
 
 # File path to the CSV file
-file_path = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\adapted_logs\average.csv"
+file_path = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\average.csv"
 
 # Plot separate graphs for each entry
 plot_separate_graphs(file_path)
