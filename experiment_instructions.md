@@ -136,18 +136,19 @@ bash automated_experiment.sh <test name> container+engine
 1. Navigate to the `src/experiments/e3/` directory.
 2. Follow the instructions in `Instructions.md` to run the experiment.
 
+
+
 ### Experiment M1
 
 1. Run the control experiment
+(run without sudo)
 ```bash
-sudo bash autmated_control.sh <memory_function_name>
+bash autmated_control.sh <memory_function_name>
 ``` 
 2. Run the experiment
 ```bash
 sudo bash autmated_experiment.sh <memory_function_name>
 ``` 
-
-
 
 
 ### Experiment M2
