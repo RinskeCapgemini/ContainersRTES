@@ -1,6 +1,8 @@
 import numpy as np 
 import time
 
+
+
 def memory_medium():
     matrix = np.ones((6000, 3400))
 

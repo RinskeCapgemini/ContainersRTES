@@ -155,8 +155,8 @@ def plot_io_usage_for_iteration(file_path_control, file_path_experiment, iterati
     fig, axes = plt.subplots(1, 2, figsize=(14, 6), sharey=True)
 
     # Plot control data
-    axes[0].plot(control_timestamps, control_read, color="blue", label="Read Usage (Control)", linewidth=2)
-    axes[0].plot(control_timestamps, control_write, color="orange", label="Write Usage (Control)", linewidth=2)
+    axes[0].plot(control_timestamps, control_write, color="orange", label="Write Usage (Control)", linewidth=2, zorder=1)
+    axes[0].plot(control_timestamps, control_read, color="blue", label="Read Usage (Control)", linewidth=2, zorder=2)
     axes[0].set_title(f"Control Data (Iteration {iteration})", fontsize=14)
     axes[0].set_xlabel("Time (s)", fontsize=12)
     axes[0].set_ylabel("Usage (MB)", fontsize=12)
@@ -164,8 +164,8 @@ def plot_io_usage_for_iteration(file_path_control, file_path_experiment, iterati
     axes[0].set_xlim(left=0)  # Ensure x-axis starts at 0
 
     # Plot experiment data
-    axes[1].plot(experiment_timestamps, experiment_read, color="blue", label="Read Usage (Experiment)", linewidth=2)
-    axes[1].plot(experiment_timestamps, experiment_write, color="orange", label="Write Usage (Experiment)", linewidth=2)
+    axes[1].plot(experiment_timestamps, experiment_write, color="orange", label="Write Usage (Experiment)", linewidth=2, zorder=1)
+    axes[1].plot(experiment_timestamps, experiment_read, color="blue", label="Read Usage (Experiment)", linewidth=2, zorder=2)
     axes[1].set_title(f"Experiment Data (Iteration {iteration})", fontsize=14)
     axes[1].set_xlabel("Time (s)", fontsize=12)
     axes[1].grid(True, linestyle="--", alpha=0.7)
@@ -187,7 +187,7 @@ file_path_control = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\control\io_long_sp
 file_path_experiment = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\experiment\io_long_speed.csv"
 
 # Specify the iteration to process
-for iteration in range(9):
+# for iteration in range(9):
 
     # Plot IO usage for the specified iteration
-    plot_io_usage_for_iteration(file_path_control, file_path_experiment, iteration)
+plot_io_usage_for_iteration(file_path_control, file_path_experiment, 0)

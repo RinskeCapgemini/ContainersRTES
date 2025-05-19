@@ -6,7 +6,7 @@ test_name=$1
 
 
 # Log directories
-host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/m1/additional_testing/"  # Host directory for logs
+host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/m1/repeat/"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
 
 # Python script directories
