@@ -102,11 +102,11 @@ if __name__=='__main__':
     run_number = int(sys.argv[2])  # Run number of the experiment
     test_type = sys.argv[3]
 
-    
+
 
     # Ensure the logs directory exists
 # Logs will be stored in the "logs/memory_logs" directory relative to the project root
-    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs", test_type))              #"../../../logs/memory_logs/m1", /app/logs, ../../../logs/memory_logs/m1/additional_testing
+    LOG_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), "/app/logs, ../../../logs/memory_logs/m1/repeat", test_type))              #"../../../logs/memory_logs/m1", /app/logs, ../../../logs/memory_logs/m1/additional_testing
     os.makedirs(LOG_DIR, exist_ok=True)
 
     # Map experiment names to their corresponding functions
