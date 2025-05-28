@@ -17,8 +17,8 @@ if __name__ == "__main__":
 
     # Use command line argument to determine the test type
     if test_type == "native":
-        file_path = r"\mnt\usb\test_io.txt" 
+        file_path = r"c:\mnt\usb\test_io.txt" 
     elif test_type == "container":
-        file_path = r"\app\usb\test_io.txt"
+        file_path = r"c:\app\usb\test_io.txt"
     
     io_low(file_path)
