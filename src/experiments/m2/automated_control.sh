@@ -4,7 +4,6 @@
 
 test_name=$1
 
-
 # Log directories
 host_log_dir="/home/rinske/Github/ContainersRTES/logs/memory_logs/m2/"  # Host directory for logs
 container_log_dir="/app/logs"  # Container directory for logs
