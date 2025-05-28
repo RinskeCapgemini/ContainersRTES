@@ -61,7 +61,7 @@ def calculate_standard_deviation(file_path, average_runtime):
 
 
 # File path to the CSV file
-file_path = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\control\io_low_inside_time.csv"
+file_path = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\cache_testing\experiment\memory_medium_time.csv"
 
 # Calculate the average runtime
 average_runtime = calculate_average_runtime(file_path)

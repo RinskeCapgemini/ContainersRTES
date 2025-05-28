@@ -71,8 +71,8 @@ def append_average_to_csv(file_path):
 
     print(f"Average Duration: {average_duration:.5f} seconds")
 
-# File path to the CSV file
-file_path = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\experiment\io_low_outside_time.csv"
+# File path to the CSV file -> Change this to your actual file path
+file_path = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\cache_testing\experiment\memory_medium_outside_time.csv"
 
 # Calculate the total time
 total_time = calculate_total_time(file_path)
