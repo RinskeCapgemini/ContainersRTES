@@ -16,9 +16,6 @@ https://www.raspberrypi.com/documentation/services/connect.html
 
 To enable Raspberry Pi Connect the following command needs to be run every time on startup. rpi-connect on.
 
-
-
-
 ## Isolate CPU cores
 To be able to use two isolated cores for the experiment a couple of changes to the cmdline.txt file need to be made.
 
