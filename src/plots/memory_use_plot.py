@@ -2,7 +2,23 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
+"""These functions are used to read memory usage from a CSV file and plots the usage"""
+
 def prepare_data(file_path):
+    """
+    Reads memory usage data from a CSV file, aligns timestamps across runs, and calculates
+    the average and standard deviation of memory usage for each timestamp.
+
+    Args:
+        file_path (str): Path to the CSV file containing memory usage data.
+                         The CSV is expected to have columns: experiment_name, run_number, timestamp, memory_usage.
+
+    Returns:
+        tuple: (all_timestamps, average_memory, std_memory)
+            - all_timestamps (list of float): Sorted list of all unique timestamps across runs.
+            - average_memory (np.ndarray): Average memory usage at each timestamp.
+            - std_memory (np.ndarray): Standard deviation of memory usage at each timestamp.
+    """
     runs = {}  # Dictionary to store data for each run
 
     # Read the CSV file
@@ -23,7 +39,7 @@ def prepare_data(file_path):
             runs[run_number]["memory_usage"].append(memory_usage)
 
     # Align timestamps across runs
-    all_timestamps = sorted(set(ts for run in runs.values() for ts in run["timestamps"]))
+    all_timestamps = sorted(set(timestamp for run in runs.values() for timestamp in run["timestamps"]))
     aligned_memory = {run_number: np.interp(all_timestamps, run["timestamps"], run["memory_usage"])
                       for run_number, run in runs.items()}
 
@@ -37,12 +53,16 @@ def prepare_data(file_path):
 
 def plot_memory_usage_side_by_side(file_path_control, file_path_experiment):
     """
-    Reads memory usage data from CSV files, calculates the average memory usage across runs,
-    and plots the control and experiment data side by side.
+    Reads memory usage data from two CSV files (control and experiment), calculates the average and standard deviation
+    of memory usage for each, and plots the results side by side for comparison.
 
     Args:
         file_path_control (str): Path to the control CSV file.
         file_path_experiment (str): Path to the experiment CSV file.
+
+    The function creates a matplotlib plot with two subplots:
+        - Left: Control data (average and ±1 std)
+        - Right: Experiment data (average and ±1 std)
     """
     control_all_timestamps, control_average_memory, control_std_memory = prepare_data(file_path_control)
     experiment_all_timestamps, experiment_average_memory, experiment_std_memory = prepare_data(file_path_experiment)
@@ -76,9 +96,10 @@ def plot_memory_usage_side_by_side(file_path_control, file_path_experiment):
     # Show the plot
     plt.show()
 
-# Filepath to the CSV files
-file_path_control = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\adapted_logs\control\memory_medium_usage.csv"
-file_path_experiment = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\adapted_logs\experiment\memory_medium_usage.csv"
+if __name__ == "__main__":
+    # Filepath to the CSV files -> change based on experiment
+    file_path_control = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\adapted_logs\control\memory_medium_usage.csv"
+    file_path_experiment = r"c:\Users\RHEEREN\GitHub\logs\memory_logs\m1\adapted_logs\experiment\memory_medium_usage.csv"
 
-# Call the function to plot the data
-plot_memory_usage_side_by_side(file_path_control, file_path_experiment)
+    # Call the function to plot the data
+    plot_memory_usage_side_by_side(file_path_control, file_path_experiment)

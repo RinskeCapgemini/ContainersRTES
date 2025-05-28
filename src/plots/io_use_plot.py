@@ -2,10 +2,23 @@ import csv
 import matplotlib.pyplot as plt
 import numpy as np
 
-
 def prepare_data(file_path):
-    """Reads io usage data from a CSV file, aligns timestamps across runs, """
+    """
+    Reads IO usage data from a CSV file, aligns timestamps across runs, and calculates
+    the average and standard deviation of read and write usage for each timestamp.
 
+    Args:
+        file_path (str): Path to the CSV file containing IO usage data.
+                         The CSV is expected to have columns: experiment_name, run_number, timestamp, read_usage, write_usage.
+
+    Returns:
+        tuple: (all_timestamps, average_read, std_read, average_write, std_write)
+            - all_timestamps (list of float): Sorted list of all unique timestamps across runs.
+            - average_read (np.ndarray): Average read usage at each timestamp.
+            - std_read (np.ndarray): Standard deviation of read usage at each timestamp.
+            - average_write (np.ndarray): Average write usage at each timestamp.
+            - std_write (np.ndarray): Standard deviation of write usage at each timestamp.
+    """
     runs = {}  # Dictionary to store data for each run
 
     # Read the CSV file
@@ -51,14 +64,17 @@ def prepare_data(file_path):
 
 def prepare_data_for_iteration(file_path, iteration):
     """
-    Reads IO usage data from a CSV file and processes data for a specific iteration.
+    Reads IO usage data from a CSV file and processes data for a specific iteration (run number).
 
     Args:
         file_path (str): Path to the CSV file.
         iteration (int): The iteration (run number) to process.
 
     Returns:
-        tuple: Timestamps, read usage, and write usage for the specified iteration.
+        tuple: (timestamps, read_usage, write_usage)
+            - timestamps (list of float): Timestamps for the specified iteration.
+            - read_usage (list of float): Read usage values for the specified iteration.
+            - write_usage (list of float): Write usage values for the specified iteration.
     """
     timestamps = []
     read_usage = []
@@ -86,6 +102,17 @@ def prepare_data_for_iteration(file_path, iteration):
 
 
 def plot_io_usage_side_by_side(file_path_control, file_path_experiment):
+    """
+    Plots average and standard deviation of IO usage (read and write) for control and experiment CSV files side by side.
+
+    Args:
+        file_path_control (str): Path to the control CSV file.
+        file_path_experiment (str): Path to the experiment CSV file.
+
+    The function creates a matplotlib plot with two subplots:
+        - Left: Control data (average and ±1 std for read and write)
+        - Right: Experiment data (average and ±1 std for read and write)
+    """
     control_all_timestamps, control_average_read, control_std_read, control_average_write, control_std_write  = prepare_data(file_path_control)
     experiment_all_timestamps, experiment_average_read, experiment_std_read, experiment_average_write, experiment_std_write = prepare_data(file_path_experiment)
     
@@ -108,8 +135,6 @@ def plot_io_usage_side_by_side(file_path_control, file_path_experiment):
     axes[0].set_xlabel("Time (s)", fontsize=12)
     axes[0].set_ylabel("Usage (MB)", fontsize=12)
     axes[0].grid(True, linestyle="--", alpha=0.7)
-
-
 
     # Plot experiment data
     axes[1].plot(experiment_all_timestamps, experiment_average_read, color="blue", label="Average Test", linewidth=2)
@@ -146,6 +171,10 @@ def plot_io_usage_for_iteration(file_path_control, file_path_experiment, iterati
         file_path_control (str): Path to the control CSV file.
         file_path_experiment (str): Path to the experiment CSV file.
         iteration (int): The iteration (run number) to process.
+
+    The function creates a matplotlib plot with two subplots:
+        - Left: Control data for the specified iteration (read and write)
+        - Right: Experiment data for the specified iteration (read and write)
     """
     # Prepare data for the specified iteration
     control_timestamps, control_read, control_write = prepare_data_for_iteration(file_path_control, iteration)
@@ -181,13 +210,11 @@ def plot_io_usage_for_iteration(file_path_control, file_path_experiment, iterati
     # Show the plot
     plt.show()
 
+if __name__ == "__main__":
 
-# File paths to the CSV files
-file_path_control = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\control\io_long_speed.csv"
-file_path_experiment = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\experiment\io_long_speed.csv"
-
-# Specify the iteration to process
-# for iteration in range(9):
+    # File paths to the CSV files -> change these based on the experiment to plot.
+    file_path_control = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\control\io_long_speed.csv"
+    file_path_experiment = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\experiment\io_long_speed.csv"
 
     # Plot IO usage for the specified iteration
-plot_io_usage_for_iteration(file_path_control, file_path_experiment, 0)
+    plot_io_usage_for_iteration(file_path_control, file_path_experiment, 0)
