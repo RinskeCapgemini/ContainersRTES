@@ -48,10 +48,11 @@ def plot_separate_graphs(file_path):
             # plt.tight_layout()
             plt.show()
 
+if __name__ == "__main__":
+    
+    # File path to the CSV file
+    file_path = r"c:\Users\RHEEREN\GitHub\logs\CPU_logs\m1\average.csv"
 
-# File path to the CSV file
-file_path = r"c:\Users\RHEEREN\GitHub\logs\io_logs\i1\average.csv"
-
-# Plot separate graphs for each entry
-plot_separate_graphs(file_path)
+    # Plot separate graphs for each entry
+    plot_separate_graphs(file_path)
 
