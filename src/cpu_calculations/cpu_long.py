@@ -1,8 +1,9 @@
-"""Heavy calculation for CPU time"""
+"""Performs a heavy CPU-bound calculation by finding all primes up to n."""
 
 def cpu_long(n=20000000):
-    primes = [True] * (n + 1)
+    # Return a list of all prime numbers up to n
 
+    primes = [True] * (n + 1)
     primes[0] = False
     primes[1] = False
 
